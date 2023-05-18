@@ -31,20 +31,19 @@ export const useUsersStore = defineStore("users", {
     emailsUsed: []
   }),
 
-  actions:{
+actions:{
 
+  confirmEmail(email,pwd){
 
-    confirmLogin(input, pwd){
-console.log(input,pwd)
-const user = this.users.filter(
-  (user) => user.username 
-);
-
-console.log(user)
-if(input === "sergio@gmail.com"){
-  console.log("Say hey")
+const found = this.users.find(user => user.email === email|| user.username  === email && user.password === pwd)
+if(found.email === email && found.password === pwd){
+  console.log("Good")
+}else{
+  return "FUCK"
 }
- 
-    }
+
   }
+}
+
+
 });

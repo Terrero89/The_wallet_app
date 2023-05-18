@@ -1,19 +1,13 @@
 <script lang="ts" setup>
 import { useUsersStore } from "@/stores/users";
-import { storeToRefs } from "pinia";
+
 const store = useUsersStore();
-const { users, confirmLogin} = useUsersStore();
+const { users,confirmEmail} = useUsersStore();
 
 
 
 const input = ref("");
 const password = ref("");
-
-const user = ref({
-    username: input.value,
-    password: password.value
-
-})
 
 
 const validation = ref({
@@ -22,29 +16,26 @@ const validation = ref({
 })
 
 const submitForm = () =>{
-    confirmLogin(input.value, password.value)
-    console.log(input.value, password.value)
+    
+    console.log("login in...")
+   
+console.log(    confirmEmail(input.value,password.value))
 }
 
-const fil = users.filter(user => user.email === "sergio@gmail.com")
 
-console.log(fil)
 
 </script>
 
 <template>
   <div class="form">
  
-<div>
 
-
-</div>
 
     <form @submit.prevent="submitForm"> 
         <div class="header">
             <h3>Sign in</h3>
         </div>
-        
+    
         <el-input class="input" v-model="input" placeholder="Email or Username" />
         <el-input  class="input"  v-model="password" type="password" placeholder="Passwod" />
         <p>{{ validation.error ? "wrong password or username" : "" }}</p>
