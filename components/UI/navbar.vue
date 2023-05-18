@@ -1,44 +1,40 @@
 <template>
-
+  <header>
     <nav class="navbar">
-       <div>
+      <div>
         <li class="nav-logo"><a href="#">TrackerApp</a></li>
-       </div>
-    <ul class="nav-links">
-     
-      <li><a href="#">Home</a></li>
-      <li><a href="#">About</a></li>
-      <li><a href="#">Services</a></li>
-      <li><a href="#">Contact</a></li>
-    </ul>
-    <div class="buttons">
+      </div>
+      <div class="links">
+        <ul class="nav-links">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">About</a></li>
 
-   <NuxtLink to="/login"  class="login-btn"> <el-button class="login-btn">Sign in</el-button></NuxtLink>
-   <NuxtLink to="/signup"  class="signup-btn"> <el-button type="info" class="signup-btn">Sign up</el-button></NuxtLink>
-    </div>
-    
-  </nav>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
 
-
-
+      <NuxtLink to="/login" class="login-btn">
+        <el-button class="login-btn">Login</el-button></NuxtLink
+      >
+      <NuxtLink to="/signup" class="signup-btn">
+        <el-button type="info" class="signup-btn">Sign up</el-button></NuxtLink
+      >
+    </nav>
+  </header>
 </template>
 
-
 <style scoped>
+.nav-logo {
+  font-size: 18px;
+  padding: 10px 12px;
 
-.nav-logo{
-    font-size: 18px;
-    padding: 10px 12px;
-    margin-right: 10rem;
-    list-style: none;
-    color: black;
-   
-    
+  list-style: none;
+  color: black;
 }
 
-.nav-logo a{
-    color: black;
-    text-decoration: none;
+.nav-logo a {
+  color: black;
+  text-decoration: none;
 }
 .navbar {
   background-color: #f2f2f2;
@@ -47,9 +43,6 @@
   justify-content: center;
   align-items: center;
   /* border:solid rgb(197, 197, 197) 1px; */
-
-  
-
 }
 
 .nav-links {
@@ -59,17 +52,18 @@
   padding: 0;
 }
 
-@media screen and (max-width: 678px){
-    .nav-links{
-        display: none;
-    }
+@media screen and (max-width: 678px) {
+  .nav-links {
+    display: none;
+  }
 }
-
-
-
 
 .nav-links li {
   margin-right: 10px;
+}
+
+.links {
+  margin: 0 4rem;
 }
 
 .nav-links li a {
@@ -79,25 +73,22 @@
   border-radius: 5px;
 }
 
-.buttons{
-    margin-left: 10rem;
-    
-
+.buttons {
+  margin-left: 10rem;
+  display: block;
+  border: solid red 1px;
 }
 
-.login-btn{
-    margin-right:5px ;
-    text-decoration: none;
-    border: none;
-    color: black;
+.login-btn {
+  text-decoration: none;
+  border: none;
+  color: black;
 }
 .signup-btn {
   padding: 8px 16px;
-  
 
   border: none;
   border-radius: 5px;
   cursor: pointer;
-
 }
 </style>

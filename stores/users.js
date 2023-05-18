@@ -33,16 +33,16 @@ export const useUsersStore = defineStore("users", {
 
 actions:{
 
-  confirmEmail(email,pwd){
+//   confirmEmail(email,pwd){
 
-const found = this.users.find(user => user.email === email|| user.username  === email && user.password === pwd)
-if(found.email === email && found.password === pwd){
-  console.log("Good")
-}else{
-  return "FUCK"
-}
+// const found = this.users.find(user => (user.email === email|| user.username  === email) && user.password === pwd)
+// if(found.email === email && found.password === pwd){
+//   console.log("Good")
+// }else{
+//   return "FUCK"
+// }
 
-  }
+//   }
 }
 
 

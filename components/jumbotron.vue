@@ -43,7 +43,7 @@ import { Jumbotron } from '../.nuxt/components';
 .subtitle{
   font-size: 2.5rem;
   color: rgb(63, 63, 63);
-  line-height:1.3rem;
+
 }
 
 .para{
@@ -51,8 +51,5 @@ import { Jumbotron } from '../.nuxt/components';
   color: rgb(63, 63, 63);
 }
 
-.brackets{
 
-
-}
 </style>

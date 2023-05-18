@@ -18,6 +18,7 @@ const submitForm = () =>{
         console.log("not good, return and show something....")
         validation.value.error = true
     }
+      console.log(password.value, email.value)
 }
 </script>
 
