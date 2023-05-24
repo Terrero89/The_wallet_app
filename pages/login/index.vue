@@ -1,19 +1,21 @@
 <script setup>
-
-
+import { useAuthStore } from "@/stores/auth";
+const authStore = useAuthStore();
+const { isLoggedIn } = useAuthStore();
 
 definePageMeta({
-  layout: "login",
+  layout: "default",
+  middleware: 'auth',
 });
+
+
+
 </script>
 
 <template>
   <div>
-   
+    <h1></h1>
 
-    <loginForm/>
-   
-
- 
+    <loginForm />
   </div>
 </template>

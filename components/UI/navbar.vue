@@ -1,3 +1,10 @@
+<script setup>
+import { useAuthStore } from "@/stores/auth";
+const authStore = useAuthStore();
+const { isAuthenticated,logout } = useAuthStore();
+</script>
+
+
 <template>
   <header>
     <nav class="navbar">
@@ -13,8 +20,11 @@
         </ul>
       </div>
 
-      <NuxtLink to="/login" class="login-btn">
+      <NuxtLink v-if="!isAuthenticated" to="/login" class="login-btn">
         <el-button class="login-btn">Login</el-button></NuxtLink
+      >
+        <NuxtLink v-if="isAuthenticated" to="/login" @click="logout" class="login-btn">
+        <el-button class="login-btn">LOGOUT</el-button></NuxtLink
       >
       <NuxtLink to="/signup" class="signup-btn">
         <el-button type="info" class="signup-btn">Sign up</el-button></NuxtLink

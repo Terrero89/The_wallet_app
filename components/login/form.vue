@@ -1,25 +1,34 @@
 <script lang="ts" setup>
 import { useUsersStore } from "@/stores/users";
-import { useLoginStore } from "@/stores/login";
+import { useAuthStore } from "@/stores/auth";
 
-const loginStore = useLoginStore()
-const {isLoggedIn,confirmEmail, cliOn} = useLoginStore()
+const authStore = useAuthStore();
+const { isAuthenticated, login, isAdmin} = useAuthStore();
 const store = useUsersStore();
 const { users } = useUsersStore();
 
-const input = ref<string>("");
-const password = ref<string | number>("");
+const props = defineProps(['login'])
 
-const validation = ref({
+
+const input = ref<string>("");
+const password = ref<string >("");
+
+//validation object
+const validation = reactive({
   error: false,
-  validated: true,
+  validated: false,
 });
 
 const submitForm = () => {
-  console.log("login in...");
+  if (input.value !== "" && password.value !== "") {
+    validation.validated = true;
     console.log(input.value, password.value);
-   console.log(confirmEmail(input.value, password.value))
-  
+    console.log("no errors happened, will log in");
+    console.log(login(input.value, password.value)); //log in user
+    isAdmin(input.value)
+  } if (password.value.length < 6) {
+    console.log("FCKKED")
+  }
 };
 </script>
 
@@ -35,13 +44,17 @@ const submitForm = () => {
         class="input"
         v-model="password"
         type="password"
-        placeholder="Passwod"
+        placeholder="Password"
       />
       <p>{{ validation.error ? "wrong password or username" : "" }}</p>
 
-<p>{{ loginStore.isLoggedIn }}</p>
+      <p>{{ authStore.isAuthenticated }}</p>
+
       <button class="submit-btn" type="submit">Login</button>
-      <NuxtLink to="/signup">Not a member? signup here</NuxtLink>
+      <div>
+        <span>Not a member?</span>
+        <NuxtLink to="/signup"> signup here</NuxtLink>
+      </div>
     </form>
   </div>
 </template>
@@ -63,9 +76,9 @@ const submitForm = () => {
 
 .form {
   border: solid rgb(233, 233, 233) 1px;
-  max-width: 25rem;
+  max-width: 20rem;
   margin: 0 auto;
-  padding: 1.5rem 3rem;
+  padding: 1.5rem 1rem;
   border-radius: 10px;
   background-color: white;
   box-shadow: 5px 5px 17px 5px rgba(0, 0, 0, 0.1);
