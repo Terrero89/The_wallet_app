@@ -1,7 +1,9 @@
 <script setup>
 import { useAuthStore } from "@/stores/auth";
 const authStore = useAuthStore();
-const { isAuthenticated,logout } = useAuthStore();
+const { isAuthenticated,logout, isAuth } = useAuthStore();
+
+const auth = computed(()=> authStore.isAuth)
 </script>
 
 
@@ -20,10 +22,10 @@ const { isAuthenticated,logout } = useAuthStore();
         </ul>
       </div>
 
-      <NuxtLink v-if="!isAuthenticated" to="/login" class="login-btn">
+      <NuxtLink v-if="!auth" to="/login" class="login-btn">
         <el-button class="login-btn">Login</el-button></NuxtLink
       >
-        <NuxtLink v-if="isAuthenticated" to="/login" @click="logout" class="login-btn">
+        <NuxtLink v-if="auth" to="/login" @click="authStore.isAuthenticated = false" class="login-btn">
         <el-button class="login-btn">LOGOUT</el-button></NuxtLink
       >
       <NuxtLink to="/signup" class="signup-btn">

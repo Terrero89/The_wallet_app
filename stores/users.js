@@ -9,9 +9,9 @@ export const useUsersStore = defineStore("users", {
     users: [
       {
         id: "1",
-        email: "sergio@gmail.com",
+        email: "admin",
         username: "Terrero89",
-        password: "123456",
+        password: "123",
         isAdmin: true,
       },
 

@@ -3,7 +3,7 @@ import { useUsersStore } from "@/stores/users";
 import { useAuthStore } from "@/stores/auth";
 
 const authStore = useAuthStore();
-const { isAuthenticated, login, isAdmin} = useAuthStore();
+const { isAuthenticated, login,} = useAuthStore();
 const store = useUsersStore();
 const { users } = useUsersStore();
 
@@ -23,12 +23,13 @@ const submitForm = () => {
   if (input.value !== "" && password.value !== "") {
     validation.validated = true;
     console.log(input.value, password.value);
-    console.log("no errors happened, will log in");
+    console.log("LOGGEd in...");
     console.log(login(input.value, password.value)); //log in user
-    isAdmin(input.value)
-  } if (password.value.length < 6) {
-    console.log("FCKKED")
+
   }
+  // if (password.value.length < 6) {
+  //   console.log("FCKKED")
+  // }
 };
 </script>
 

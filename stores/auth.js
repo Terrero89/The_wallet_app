@@ -3,17 +3,19 @@ import { useUsersStore } from "./users";
 
 export const useAuthStore = defineStore("auth", {
   state: () => ({
-    isAuthenticated:false,
+    isAuthenticated:null,
   }),
 
   actions: {
     login(email, pwd) {
       const usersList = useUsersStore(); //users store
       const found = usersList.users.find((user) => user.email === email);
-      
+
       //* test condition to check user
       if (found.email === email && found.password === pwd) {
         this.isAuthenticated= true; //testing login
+
+
         return "bERY GOOD";
       } else {
         this.isAuthenticated = false;
@@ -22,15 +24,21 @@ export const useAuthStore = defineStore("auth", {
     },
   },
 
-  isAdmin(data) {
-    const usersList = useUsersStore(); //users store
-    const found = usersList.users.find((user) => user.email === data);
-    console.log(found.isAdmin)
-    return found.isAdmin
-  }
-,
+  // isAdmin(data) {
+  //   const usersList = useUsersStore(); //users store
+  //   const found = usersList.users.find((user) => user.email === data);
+  //   console.log(found.isAdmin)
+  //   return found.isAdmin
+  // }
+
   logout() {
     this.isLoggedIn = false;
-    console.log("Logout:" + this.isAuthenticated)
-  }
+
+  },
+
+    getters:{
+      isAuth(state){
+          return state.isAuthenticated
+      }
+    }
 });
