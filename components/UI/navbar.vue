@@ -1,17 +1,17 @@
 <script setup>
 import { useAuthStore } from "@/stores/auth";
 const authStore = useAuthStore();
-const { isAuthenticated, isAuth, logout } = useAuthStore();
+const { isAuthenticated, isAuth, logout,needsProfile } = useAuthStore();
 
-const auth = computed(()=> authStore.isAuth)
+const auth = computed(() => authStore.isAuth);
+const name = needsProfile()
 </script>
-
 
 <template>
   <header>
     <nav class="navbar">
       <div>
-        <li class="nav-logo"><a href="#">TrackerApp</a></li>
+        <li class="nav-logo"><a href="/">TrackerApp</a></li>
       </div>
       <div class="links">
         <ul class="nav-links">
@@ -21,11 +21,11 @@ const auth = computed(()=> authStore.isAuth)
           <li><a href="#">Contact</a></li>
         </ul>
       </div>
-
+{{ needsProfile()}}
       <NuxtLink v-if="!auth" to="/login" class="login-btn">
         <el-button class="login-btn">Login</el-button></NuxtLink
       >
-        <NuxtLink v-if="auth" to="/login" @click="logout" class="login-btn">
+      <NuxtLink v-if="auth" to="/login" @click="logout" class="login-btn">
         <el-button class="login-btn">LOGOUT</el-button></NuxtLink
       >
       <NuxtLink to="/signup" class="signup-btn">

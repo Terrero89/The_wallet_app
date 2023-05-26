@@ -1,11 +1,14 @@
 import { useAuthStore } from "@/stores/auth";
 const authStore = useAuthStore();
-const { isAuthenticated,isAdmin, isAuth} = useAuthStore();
+const { isAuthenticated,isAdmin, isAuth, needsProfile} = useAuthStore();
 
 export default defineNuxtRouteMiddleware((to, from) => {
-    if (isAuth) {
+    console.log("profile: " + needsProfile())
+    if (!isAuth && needsProfile ) {
       navigateTo("/")
+        // console.log("needs Profile")
         
         
     }
 })
+

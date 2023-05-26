@@ -24,7 +24,9 @@ const submitForm = () => {
     validation.validated = true;
     console.log(input.value, password.value);
     console.log("LOGGEd in...");
-    console.log(login(input.value, password.value)); //log in user
+  
+   login(input.value, password.value) //log in user
+
 
   }
   // if (password.value.length < 6) {

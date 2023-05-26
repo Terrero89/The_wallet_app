@@ -4,6 +4,8 @@ import { useUsersStore } from "./users";
 export const useAuthStore = defineStore("auth", {
   state: () => ({
     isAuthenticated: null,
+    userState: '',
+    email: ''
   }),
 
   actions: {
@@ -15,8 +17,10 @@ export const useAuthStore = defineStore("auth", {
       if (found.email === email && found.password === pwd) {
         this.isAuthenticated = true; //testing login
 
-      const userItem =  localStorage.setItem("user", found.email);
-        return "bERY GOOD";
+        const userItem = localStorage.setItem( found.email, found.username);
+        this.userState = localStorage.getItem(found.email)
+        this.email = this.userState
+        console.log("Good login")
       } else {
         this.isAuthenticated = false;
         return "Not GOOD";
@@ -25,20 +29,26 @@ export const useAuthStore = defineStore("auth", {
 
     logout() {
       this.isAuthenticated = false;
-      localStorage.removeItem("user");
+      localStorage.removeItem("admin");
+    },
+
+    //async function to wait for the token localstorage
+    async needsProfile() {
+      const usersList = useUsersStore(); //users store
+      
+     const response = await this.userState //awaits for the response and uses it in the find method
+     console.log("response:" + response)
+      const found = usersList.users.find((user) => user.username === response); //find the one = to username and compared.
+     return found.isProfileCompleted
     },
   },
-
-  // isAdmin(data) {
-  //   const usersList = useUsersStore(); //users store
-  //   const found = usersList.users.find((user) => user.email === data);
-  //   console.log(found.isAdmin)
-  //   return found.isAdmin
-  // },
 
   getters: {
     isAuth(state) {
       return state.isAuthenticated;
     },
+    isDone() {
+      return state.userState
+    }
   },
 });

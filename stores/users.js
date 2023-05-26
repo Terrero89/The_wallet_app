@@ -31,7 +31,7 @@ export const useUsersStore = defineStore("users", {
         email: "cami@gmail.com",
         username: "Cterrero90",
         password: "123456",
-        isProfileCompleted: true,
+        isProfileCompleted: false,
         isLoggedIn: null,
         isAdmin: false,
       },
