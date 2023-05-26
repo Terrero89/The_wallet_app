@@ -67,6 +67,7 @@ const submitForm = () => {
   border-radius: 5px;
   margin: 2rem 0;
   color: black;
+    width: 100%;
 }
 
 .submit-btn:hover {

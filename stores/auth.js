@@ -3,7 +3,7 @@ import { useUsersStore } from "./users";
 
 export const useAuthStore = defineStore("auth", {
   state: () => ({
-    isAuthenticated:null,
+    isAuthenticated: null,
   }),
 
   actions: {
@@ -13,14 +13,19 @@ export const useAuthStore = defineStore("auth", {
 
       //* test condition to check user
       if (found.email === email && found.password === pwd) {
-        this.isAuthenticated= true; //testing login
+        this.isAuthenticated = true; //testing login
 
-
+      const userItem =  localStorage.setItem("user", found.email);
         return "bERY GOOD";
       } else {
         this.isAuthenticated = false;
         return "Not GOOD";
       }
+    },
+
+    logout() {
+      this.isAuthenticated = false;
+      localStorage.removeItem("user");
     },
   },
 
@@ -29,16 +34,11 @@ export const useAuthStore = defineStore("auth", {
   //   const found = usersList.users.find((user) => user.email === data);
   //   console.log(found.isAdmin)
   //   return found.isAdmin
-  // }
+  // },
 
-  logout() {
-    this.isLoggedIn = false;
-
+  getters: {
+    isAuth(state) {
+      return state.isAuthenticated;
+    },
   },
-
-    getters:{
-      isAuth(state){
-          return state.isAuthenticated
-      }
-    }
 });

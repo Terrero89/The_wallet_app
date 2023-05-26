@@ -12,6 +12,8 @@ export const useUsersStore = defineStore("users", {
         email: "admin",
         username: "Terrero89",
         password: "123",
+        isProfileCompleted: true,
+        isLoggedIn: null,
         isAdmin: true,
       },
 
@@ -20,14 +22,18 @@ export const useUsersStore = defineStore("users", {
         email: "jackie@gmail.com",
         username: "Jterrero90",
         password: "123456",
-        isAdmin:  false
+        isProfileCompleted: true,
+        isLoggedIn: null,
+        isAdmin: false,
       },
       {
         id: "3",
         email: "cami@gmail.com",
         username: "Cterrero90",
         password: "123456",
-        isAdmin: false
+        isProfileCompleted: true,
+        isLoggedIn: null,
+        isAdmin: false,
       },
 
       {
@@ -35,7 +41,9 @@ export const useUsersStore = defineStore("users", {
         email: "ezra@gmail.com",
         username: "Eterrero90",
         password: "123456",
-        isAdmin: false
+        isProfileCompleted: true,
+        isLoggedIn: null,
+        isAdmin: false,
       },
     ],
   }),
@@ -43,7 +51,7 @@ export const useUsersStore = defineStore("users", {
   actions: {
     //add a new user that signup
     signup(user) {
-      let signup = (this.isSignedUp = true);
+      let signup = (this.isLoggedIn = true);
       let id = String(this.id);
       this.users.push({ ...user, id, signup });
       this.id++;
