@@ -1,16 +1,22 @@
 <script lang="ts" setup>
 import { useUsersStore } from "@/stores/users";
+const userStore = useUsersStore()
+const { users, registeredEmails, registeredUsernames, signup } = useUsersStore();
 
-const { users, signup } = useUsersStore();
-
-const email = ref("");
+const email = ref<string>("");
 const username = ref<string>("");
 const password = ref<string>("");
 const password2 = ref<string>("");
 
-const validation = ref({
+//validation individually
+const error = ref({
   error: false,
-  validated: true,
+  ok: true,
+  username: false,
+  email: false,
+  password: false,
+  match: false,
+  input: false
 });
 
 //contains the data from imputs and return and object.
@@ -24,16 +30,50 @@ const data = () => {
   return userSignup;
 };
 
+
 //will submit form when clicked
-const submitForm = () => {
-  console.log(password.value, password.value);
-  if (password.value !== password2.value) {
-    console.log("not good, return and show something....");
-    validation.value.error = true;
-  } else {
+const submitForm = async () => {
+
+  const emailExist = await checkEmailExist(email.value)
+  const userExist = await checkUserExist(username.value)
+
+
+  if ((password.value !== password2.value )) {
+   error.value.match = true;
+    console.log("Password or username are wrong")
+  }if (emailExist){
+    error.value.email = true;
+    console.log("email already Exist")
+  } if (userExist){
+    error.value.username = true;
+    console.log("username already Exist")
+  }
+  if(username.value === "" || email.value === ""){
+    error.value.input = true;
+    console.log("Fields were left in blank")
+  }
+ if(!error.value.input && !error.value.username && !error.value.email && !error.value.password && !error.value.match){
     signup(data()); //add user signup to pinia
+    console.log("signing up....")
   }
 };
+//check if emails are already saved in DB
+const checkEmailExist = async (email) => {
+await new Promise((resolve)=> setTimeout(resolve, 1000))
+const emailExist = registeredEmails.includes(email)
+console.log("EMailExist: " + emailExist)
+return emailExist
+}
+//check if usernames are already saved in DB
+const checkUserExist = async (username) => {
+await new Promise((resolve)=> setTimeout(resolve, 10))
+const userExist= registeredUsernames.includes(username)
+console.log("USERExist: " + userExist)
+return userExist
+}
+
+
+
 </script>
 
 <template>
@@ -44,39 +84,48 @@ const submitForm = () => {
       </div>
       <el-input
         class="input"
-        @click="validation.error = false"
+        @click="error.username = false"
         v-model="username"
         placeholder="Username"
       />
+      <p class="error-log"> {{ error.username ? "Username already Exists" : "" }}</p>
       <el-input
         class="input"
-        @click="validation.error = false"
+        @click=" error.email = false"
         v-model="email"
         type="email"
         placeholder="Email"
       />
+
+      <p class="error-log"> {{ error.email ? "Email already Exists" : "" }}</p>
       <el-input
         class="input"
-        @click="validation.error = false"
+        @click="error.password = false"
         v-model="password"
         type="password"
         placeholder="Password"
       />
+    
+      
       <el-input
         class="input"
-        @click="validation.error = false"
+        @click="error.match = false"
         v-model="password2"
         type="password"
         placeholder="Confirm password"
       />
+
       <p class="error-log">
-        {{ validation.error ? "Password do not match" : "" }}
+        {{ error.match ? "Password do not match, try again..." : "" }}
       </p>
+      <p class="error-log"> {{ error.match ? "Password is less than 8 characters" : "" }}</p>
       <button class="submit-btn" type="submit">Sign up</button>
     </form>
- <!-- <div v-for="user in users">
+<div>{{ registeredEmails }}</div>
+<div>{{ registeredUsernames }}</div>
+ <div v-for="user in users">
       <p>{{ user }}</p>
-    </div> -->
+    </div>
    
   </div>
 </template>
@@ -99,7 +148,7 @@ const submitForm = () => {
 
 .form {
   border: solid rgb(233, 233, 233) 1px;
-  max-width: 20rem;
+  max-width: 28rem;
   margin: 0 auto;
   padding: 1.5rem 1rem;
   border-radius: 10px;
@@ -109,6 +158,7 @@ const submitForm = () => {
 
 .error-log {
   color: red;
+  font-size: 0.8rem;
 }
 
 .input {

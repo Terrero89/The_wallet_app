@@ -4,13 +4,15 @@ export const useUsersStore = defineStore("users", {
   state: () => ({
     id: 5,
     isSignedUp: false,
+    registeredEmails: ["sergio@aol.com","Jterrero90","cami@gmail.com","ezra@gmail.com","ezra@gmail.com",],
+    registeredUsernames: ["admin1","Terrero89","Jterrero90","Cterrero90",],
 
     //users storage for the application
     users: [
       {
         id: "1",
-        email: "admin",
-        username: "Terrero89",
+        email: "sergio@aol.com",
+        username: "admin",
         password: "123",
         isProfileCompleted: true,
         isLoggedIn: null,
@@ -51,9 +53,11 @@ export const useUsersStore = defineStore("users", {
   actions: {
     //add a new user that signup
     signup(user) {
-      let signup = (this.isLoggedIn = true);
+ 
       let id = String(this.id);
-      this.users.push({ ...user, id, signup });
+      this.users.push({ ...user, id, });
+      this.registeredEmails.push(user.email)
+      this.registeredUsernames.push(user.username)
       this.id++;
     },
     getters: {
