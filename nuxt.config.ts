@@ -1,3 +1,4 @@
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   css: ["@/assets/css/main.css"],
@@ -9,6 +10,8 @@ export default defineNuxtConfig({
   modules: [
       '@element-plus/nuxt',
       '@pinia/nuxt',
+      
+     
 
     ],
 

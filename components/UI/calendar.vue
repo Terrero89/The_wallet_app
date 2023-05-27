@@ -1,13 +1,4 @@
-<script setup>
-const dayOfMonth = ref(31)
-
-
-
-</script>
-
 <template>
 
-
-
-
+    <div>4</div>
 </template>
