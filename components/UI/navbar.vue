@@ -15,13 +15,13 @@ const name = needsProfile()
       </div>
       <div class="links">
         <ul class="nav-links">
-          <li><a href="#">Home</a></li>
+          <li><a href="#">Reserve</a></li>
           <li><a href="#">About</a></li>
 
           <li><a href="#">Contact</a></li>
         </ul>
       </div>
-{{ needsProfile()}}
+
       <NuxtLink v-if="!auth" to="/login" class="login-btn">
         <el-button class="login-btn">Login</el-button></NuxtLink
       >
