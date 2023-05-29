@@ -15,7 +15,7 @@ const name = needsProfile()
       </div>
       <div class="links">
         <ul class="nav-links">
-          <li><a href="#">Reserve</a></li>
+          <li><a href="/user">Reserve</a></li>
           <li><a href="#">About</a></li>
 
           <li><a href="#">Contact</a></li>

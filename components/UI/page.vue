@@ -7,19 +7,19 @@ definePageMeta({
 
 <template>
   <div>
-    <div class="wrapper">
+    <div class="wrapper row">
       <slot />
     </div>
   </div>
 </template>
 <style scoped>
 .wrapper {
-  border: solid rgb(212, 211, 211, 0.8) 1px;
- 
+  /* border: solid rgb(212, 211, 211, 0.8) 1px; */
+ height: 50rem;
   width: 90%;
   margin: 0 auto;
   border-radius: 10px;
-  padding: 1rem 2rem;
+  padding: 1rem 0;
   display: flex;
   justify-content:center;
   flex-wrap: wrap;

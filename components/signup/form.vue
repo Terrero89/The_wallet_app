@@ -1,14 +1,15 @@
 <script lang="ts" setup>
 import { useUsersStore } from "@/stores/users";
-const userStore = useUsersStore()
-const { users, registeredEmails, registeredUsernames, signup } = useUsersStore();
+const userStore = useUsersStore();
+const { users, registeredEmails, registeredUsernames, signup } =
+  useUsersStore();
 
 const email = ref<string>("");
 const username = ref<string>("");
 const password = ref<string>("");
 const password2 = ref<string>("");
 
-//validation individually
+//individual validation for each case
 const error = ref({
   error: false,
   ok: true,
@@ -16,10 +17,10 @@ const error = ref({
   email: false,
   password: false,
   match: false,
-  input: false
+  input: false,
 });
 
-//contains the data from imputs and return and object.
+//contains the data from inputs and return and object.
 const data = () => {
   const userSignup = {
     email: email.value,
@@ -30,50 +31,52 @@ const data = () => {
   return userSignup;
 };
 
-
-//will submit form when clicked
+//will submit form when clicked submit form
 const submitForm = async () => {
+  const emailExist = await checkEmailExist(email.value);
+  const userExist = await checkUserExist(username.value);
 
-  const emailExist = await checkEmailExist(email.value)
-  const userExist = await checkUserExist(username.value)
-
-
-  if ((password.value !== password2.value )) {
-   error.value.match = true;
-    console.log("Password or username are wrong")
-  }if (emailExist){
+  if (password.value !== password2.value) {
+    error.value.match = true;
+    console.log("Password or username are wrong");
+  }
+  if (emailExist) {
     error.value.email = true;
-    console.log("email already Exist")
-  } if (userExist){
+    console.log("email already Exist");
+  }
+  if (userExist) {
     error.value.username = true;
-    console.log("username already Exist")
+    console.log("username already Exist");
   }
-  if(username.value === "" || email.value === ""){
+  if (username.value === "" || email.value === "") {
     error.value.input = true;
-    console.log("Fields were left in blank")
+    console.log("Fields were left in blank");
   }
- if(!error.value.input && !error.value.username && !error.value.email && !error.value.password && !error.value.match){
+  if (
+    !error.value.input &&
+    !error.value.username &&
+    !error.value.email &&
+    !error.value.password &&
+    !error.value.match
+  ) {
     signup(data()); //add user signup to pinia
-    console.log("signing up....")
+    console.log("signing up....");
   }
 };
 //check if emails are already saved in DB
 const checkEmailExist = async (email) => {
-await new Promise((resolve)=> setTimeout(resolve, 1000))
-const emailExist = registeredEmails.includes(email)
-console.log("EMailExist: " + emailExist)
-return emailExist
-}
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+  const emailExist = registeredEmails.includes(email);
+  console.log("EMailExist: " + emailExist);
+  return emailExist;
+};
 //check if usernames are already saved in DB
 const checkUserExist = async (username) => {
-await new Promise((resolve)=> setTimeout(resolve, 10))
-const userExist= registeredUsernames.includes(username)
-console.log("USERExist: " + userExist)
-return userExist
-}
-
-
-
+  await new Promise((resolve) => setTimeout(resolve, 10));
+  const userExist = registeredUsernames.includes(username);
+  console.log("USERExist: " + userExist);
+  return userExist;
+};
 </script>
 
 <template>
@@ -88,16 +91,18 @@ return userExist
         v-model="username"
         placeholder="Username"
       />
-      <p class="error-log"> {{ error.username ? "Username already Exists" : "" }}</p>
+      <p class="error-log">
+        {{ error.username ? "Username already Exists" : "" }}
+      </p>
       <el-input
         class="input"
-        @click=" error.email = false"
+        @click="error.email = false"
         v-model="email"
         type="email"
         placeholder="Email"
       />
 
-      <p class="error-log"> {{ error.email ? "Email already Exists" : "" }}</p>
+      <p class="error-log">{{ error.email ? "Email already Exists" : "" }}</p>
       <el-input
         class="input"
         @click="error.password = false"
@@ -105,8 +110,7 @@ return userExist
         type="password"
         placeholder="Password"
       />
-    
-      
+
       <el-input
         class="input"
         @click="error.match = false"
@@ -118,15 +122,16 @@ return userExist
       <p class="error-log">
         {{ error.match ? "Password do not match, try again..." : "" }}
       </p>
-      <p class="error-log"> {{ error.match ? "Password is less than 8 characters" : "" }}</p>
+      <p class="error-log">
+        {{ error.match ? "Password is less than 8 characters" : "" }}
+      </p>
       <button class="submit-btn" type="submit">Sign up</button>
     </form>
-<div>{{ registeredEmails }}</div>
-<div>{{ registeredUsernames }}</div>
- <div v-for="user in users">
+    <div>{{ registeredEmails }}</div>
+    <div>{{ registeredUsernames }}</div>
+    <div v-for="user in users">
       <p>{{ user }}</p>
     </div>
-   
   </div>
 </template>
 
@@ -137,7 +142,7 @@ return userExist
   border-radius: 5px;
   margin: 2rem 0;
   color: black;
-    width: 100%;
+  width: 100%;
 }
 
 .submit-btn:hover {

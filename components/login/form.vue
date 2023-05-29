@@ -64,16 +64,20 @@ const submitForm = () => {
 
 <style scoped>
 .submit-btn {
+    background-color: rgb(96, 150, 252);
+ 
   border: solid rgb(240, 240, 240) 1px;
   padding: 0.7rem 2rem;
   border-radius: 5px;
   margin: 2rem 0;
   color: black;
     width: 100%;
+     color: white;
 }
 
 .submit-btn:hover {
-  background-color: rgb(138, 179, 255);
+   background-color: rgb(138, 179, 255);
+
   transition: 0.5s ease-in-out;
   color: white;
 }
