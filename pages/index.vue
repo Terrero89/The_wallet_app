@@ -2,6 +2,8 @@
 
 <template>
   <div>
-    <jumbotron></jumbotron>
+    <jumbotron>
+      
+    </jumbotron>
   </div>
 </template>
