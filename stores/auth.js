@@ -39,7 +39,7 @@ export const useAuthStore = defineStore("auth", {
      const response = await this.userState //awaits for the response and uses it in the find method
      console.log("response:" + response)
       const found = usersList.users.find((user) => user.username === response); //find the one = to username and compared.
-     return found.isProfileCompleted
+     return found
     },
   },
 

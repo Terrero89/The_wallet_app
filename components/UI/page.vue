@@ -1,8 +1,8 @@
 <script setup>
-definePageMeta({
-  layout: "default",
-  middleware: "auth",
-});
+// definePageMeta({
+//   layout: "default",
+//   middleware: "auth",
+// });
 </script>
 
 <template>
@@ -15,7 +15,7 @@ definePageMeta({
 <style scoped>
 .wrapper {
   /* border: solid rgb(212, 211, 211, 0.8) 1px; */
- height: 50rem;
+
   width: 90%;
   margin: 0 auto;
   border-radius: 10px;
