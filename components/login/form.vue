@@ -3,15 +3,14 @@ import { useUsersStore } from "@/stores/users";
 import { useAuthStore } from "@/stores/auth";
 
 const authStore = useAuthStore();
-const { isAuthenticated, login,} = useAuthStore();
+const { isAuthenticated, login } = useAuthStore();
 const store = useUsersStore();
 const { users } = useUsersStore();
 
-const props = defineProps(['login'])
-
+const props = defineProps(["login"]);
 
 const input = ref<string>("");
-const password = ref<string >("");
+const password = ref<string>("");
 
 //validation object
 const validation = reactive({
@@ -24,10 +23,8 @@ const submitForm = () => {
     validation.validated = true;
     console.log(input.value, password.value);
     console.log("LOGGEd in...");
-  
-   login(input.value, password.value) //log in user
 
-
+    login(input.value, password.value); //log in user
   }
   // if (password.value.length < 6) {
   //   console.log("FCKKED")
@@ -43,12 +40,7 @@ const submitForm = () => {
       </div>
 
       <el-input class="input" v-model="input" placeholder="Email or Username" />
-      <el-input
-        class="input"
-        v-model="password"
-        type="password"
-        placeholder="Password"
-      />
+      <el-input class="input" v-model="password" type="password" placeholder="Password" />
       <p>{{ validation.error ? "wrong password or username" : "" }}</p>
 
       <p>{{ authStore.isAuthenticated }}</p>
@@ -64,19 +56,19 @@ const submitForm = () => {
 
 <style scoped>
 .submit-btn {
-    background-color: rgb(96, 150, 252);
- 
+  background-color: rgb(96, 150, 252);
+
   border: solid rgb(240, 240, 240) 1px;
   padding: 0.7rem 2rem;
   border-radius: 5px;
   margin: 2rem 0;
   color: black;
-    width: 100%;
-     color: white;
+  width: 100%;
+  color: white;
 }
 
 .submit-btn:hover {
-   background-color: rgb(138, 179, 255);
+  background-color: rgb(138, 179, 255);
 
   transition: 0.5s ease-in-out;
   color: white;
@@ -84,12 +76,25 @@ const submitForm = () => {
 
 .form {
   border: solid rgb(233, 233, 233) 1px;
-  max-width: 20rem;
+  max-width: 30rem;
+  height: 35rem;
   margin: 0 auto;
-  padding: 1.5rem 1rem;
+  padding: 4rem 2rem;
   border-radius: 10px;
   background-color: white;
   box-shadow: 5px 5px 17px 5px rgba(0, 0, 0, 0.1);
+}
+@media screen and (min-width: 768px) {
+  .form {
+    padding: 4rem 2rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .form {
+    max-width: 100%;
+    height: 95vh;
+  }
 }
 
 .input {

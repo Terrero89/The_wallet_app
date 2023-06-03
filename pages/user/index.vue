@@ -8,7 +8,9 @@ const { dates } = reservationsStore;
 // middleware: "auth",
 // });
 
-const date = ref(new Date().toLocaleDateString());
+// const date = ref(new Date().toLocaleDateString());
+
+const date = ref("5/22/2023");
 console.log(date.value);
 
 const mm = ref("");
@@ -19,39 +21,52 @@ const dateForm = computed(() => dates.filter((el) => el.date === date.value)); /
 <template>
   <div>
     <UIPage>
-      <div class="row">
-        <div class="col-lg-8 col-md-8 col-sm-6 order-1-sm border">
+      <div class="row options">
+        <div class="col-lg-8 col-md-6 col-sm-10 order-1-sm ">
           <!-- search bar for dates -->
-          <div class="search-bar d-flex justify-content-center">
-            <label for=""> </label>
-            <input v-model="date" type="search" placeholder="MM/DD/YY" />
-           
-          </div>
-        
+      
 
 
 
         <div>Menu</div>
-        <div class="row">
+        <div class="row d-flex justify-content-center ">
 
-          <div class="col-lg-12 border my-2">
-           up coming appointents
-          </div>
-          <div class="col-12 border my-2">
-            Last appointment
+         
+
+          <div class=" options  col-4 col-md-4 col-sm-12  my-2">
+            <NuxtLink class="option">
+              <el-button>Reservations</el-button>
+          </NuxtLink>
           </div>
 
-          <div class="col-12 border my-2">
-            Visist last 3 months
+          <div class="options  col-4 col-md-4 col-sm-12 my-2">
+            <NuxtLink class="option">
+              <el-button>Last 3 month</el-button>
+          </NuxtLink>
           </div>
+
+          <div class="options  col-4 col-md-4 col-sm-12 my-2">
+            <NuxtLink class="option">
+              <el-button>Last 3 month</el-button>
+          </NuxtLink>
+          </div>
+          
+          
         </div>
 
-        <el-button class="my-2"> send message</el-button>
+        
         </div>
 
         <!-- dates sections -->
-        <div class="col-lg-4 col-md-4 col-sm-6  ">
+        <div class="col-lg-4 col-md-6 col-sm-10  ">
+
+          
           <form class="select-dates-form border border-gray mt-5 px-3 align-left">
+            <div class="search-bar my-0 mx-auto">
+            <label for=""> </label>
+            <input v-model="date" type="search" placeholder="MM/DD/YY" />
+           
+          </div>
             <div class="selected-dates col">
               <h6>Available dates</h6>
               <div class="dates" v-for="(date) in dateForm" :key="date">
@@ -75,13 +90,14 @@ const dateForm = computed(() => dates.filter((el) => el.date === date.value)); /
   </div>
 </template>
 <style scoped>
+
 .dates {
   width: auto;
   margin: 0 auto;
 }
 .selected-dates {
   margin: 0 auto;
-}
+} 
 .select-dates-form {
   border-radius: 10px;
   padding: .5rem 0;

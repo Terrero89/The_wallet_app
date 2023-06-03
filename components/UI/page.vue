@@ -16,7 +16,7 @@
 .wrapper {
   /* border: solid rgb(212, 211, 211, 0.8) 1px; */
 
-  width: 90%;
+  width: 95%;
   margin: 0 auto;
   border-radius: 10px;
   padding: 1rem 0;

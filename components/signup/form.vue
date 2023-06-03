@@ -1,8 +1,10 @@
 <script lang="ts" setup>
 import { useUsersStore } from "@/stores/users";
+import { storeToRefs } from 'pinia'
+
 const userStore = useUsersStore();
-const { users, registeredEmails, registeredUsernames, signup } =
-  useUsersStore();
+const { users,  registeredEmails, registeredUsernames } = useUsersStore(); //
+const { signup } = userStore //destructured user store for actions.
 
 const email = ref<string>("");
 const username = ref<string>("");
@@ -77,6 +79,8 @@ const checkUserExist = async (username) => {
   console.log("USERExist: " + userExist);
   return userExist;
 };
+
+const { data: emails } = await useFetch("https://reservation-system-api-default-rtdb.firebaseio.com/users.json")
 </script>
 
 <template>
@@ -129,27 +133,37 @@ const checkUserExist = async (username) => {
     </form>
     <div>{{ registeredEmails }}</div>
     <div>{{ registeredUsernames }}</div>
-    <div v-for="user in users">
+    <!-- <div v-for="user in users">
       <p>{{ user }}</p>
+    </div> -->
+
+    <div v-for="i in emails">
+      <span>{{ i.email}}</span>
+      <span>{{ i.username}}</span>
     </div>
   </div>
 </template>
 
 <style scoped>
 .submit-btn {
+  background-color: rgb(96, 150, 252);
+
   border: solid rgb(240, 240, 240) 1px;
   padding: 0.7rem 2rem;
   border-radius: 5px;
   margin: 2rem 0;
   color: black;
   width: 100%;
+  color: white;
 }
 
 .submit-btn:hover {
   background-color: rgb(138, 179, 255);
+
   transition: 0.5s ease-in-out;
   color: white;
 }
+
 
 .form {
   border: solid rgb(233, 233, 233) 1px;
@@ -159,6 +173,19 @@ const checkUserExist = async (username) => {
   border-radius: 10px;
   background-color: white;
   box-shadow: 5px 5px 17px 5px rgba(0, 0, 0, 0.1);
+}
+
+@media screen and (min-width: 768px) {
+  .form {
+    padding: 4rem 2rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .form {
+    max-width: 100%;
+    height: 95vh;
+  }
 }
 
 .error-log {

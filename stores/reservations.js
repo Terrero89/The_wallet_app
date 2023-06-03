@@ -18,7 +18,6 @@ export const useReservationsStore = defineStore("reservations", {
         date: "5/22/2023",
         time: "3:00 PM",
         slotNumber: 1,
-
         available: true,
         isCompleted: true,
       },
@@ -28,7 +27,6 @@ export const useReservationsStore = defineStore("reservations", {
         time: "4:00 PM",
         slotNumber: 3,
         available: true,
-
         isCompleted: true,
       },
 
@@ -88,7 +86,7 @@ export const useReservationsStore = defineStore("reservations", {
   actions: {},
   getters: {
     dates(state) {
-      return state.reservedDates.filter((el) => el.date);
-    },
+      return state.reservedDates.filter((el) => el.date);},
+    
   },
 });
