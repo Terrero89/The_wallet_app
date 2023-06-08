@@ -79,17 +79,17 @@ const timeFormat = (date) => {
             </div>
             <!-- last 3 visits details -->
             <div class="row">
-              <div class="details col-lg-12 mt-2">
+              <div class="details d-flex justify-content-center flex-wrap">
                 <h4 class="title">last 3 visits</h4>
-                <div class="info border mt-2 px-2 py-1 col-lg-4">
+                <div class="info border mt-2 px-2 py-1 col-sm-12">
                   <h6 class="date">Jun 24, 2023</h6>
                   <h6 class="time">06:30 PM</h6>
                 </div>
-                <div class="info border mt-2 px-2 py-1 col-lg-4">
+                <div class="info border mt-2 px-2 py-1 col-sm-12">
                   <h6 class="date">Jun 24, 2023</h6>
                   <h6 class="time">06:30 PM</h6>
                 </div>
-                <div class="info border mt-2 px-2 py-1 col-lg-4">
+                <div class="info border mt-2 px-2 py-1 col-sm-12">
                   <h6 class="date">Jun 24, 2023</h6>
                   <h6 class="time">06:30 PM</h6>
                 </div>
@@ -155,6 +155,9 @@ const timeFormat = (date) => {
 .details {
   border: solid rgb(185, 185, 185, 0.6) 1px;
   border-radius: 8px;
+}
+.info {
+  width: 100%;
 }
 .details .title {
   font-size: 0.9rem;
