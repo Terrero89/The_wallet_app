@@ -1,10 +1,11 @@
 <script lang="ts" setup>
+import { ref } from "vue";
+
+defineProps(['timeInput'])
+defineEmits(['update:timeInput'])
 
 
-const props = defineProps(['input'])
-
-
-console.log(props.input)
+const timeInput = ref(""); //testing time picker
 </script>
 
 <template>
@@ -13,16 +14,11 @@ console.log(props.input)
   <div >
     <div class="block">
       
-      <el-date-picker
-        v-model="props.input"
-        placeholder="Pick a date"
-        format="MM/DD/YYYY"
-        value-format="MM/DD/YYYY"
-      />
+     
     </div> 
     <!-- just the time picker will be in another component-->
     <!-- <el-time-select
-      v-model="timeValue"
+      v-model="timeInput"
       start="10:00"
       step="01:30"
       end="20:30"

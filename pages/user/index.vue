@@ -1,18 +1,43 @@
-<script setup>
+<script setup lang="ts">
 import { useReservationsStore } from "@/stores/reservations";
 const reservationsStore = useReservationsStore();
 const { dates } = reservationsStore;
 
-// definePageMeta({
-// layout: "default",
-// middleware: "auth",
-// });
+interface Reservation {
+  date: string | null;
+  time: string | null;
+}
 
 // const date = ref(new Date().toLocaleDateString());
 
-const date = ref("05/22/2023");
-const time = ref(null); //testing time picker
-console.log(date.value);
+const date = ref("");
+const time = ref(""); //testing time picker
+
+//function used to clear inputs adter submitted
+const clearInputs = () => {
+  date.value = "";
+  time.value = "";
+};
+
+//submits form with data to server
+const submitHandler = () => {
+  const reservation = ref<Reservation>({
+    time: time.value,
+    date: date.value,
+  });
+
+  console.log(reservation.value.date, reservation.value.time);
+
+  clearInputs();
+};
+
+// const dateFormat = computed(()=>{
+//   let year = date.value.slice(0,4)
+//   let day = date.value.slice(8,10)
+//   let month = date.value.slice(5,7)
+//   let fullDate =  `${month}/${day}/${year}`
+//   date.value = fullDate
+//   return fullDate.toString()
 
 const mm = ref("");
 
@@ -30,128 +55,106 @@ const timeFormat = (date) => {
   var time = hours + ":" + minutes + " " + format;
   return time;
 };
+
+// definePageMeta({
+// layout: "default",
+// middleware: "auth",
+// });
 </script>
 
 <template>
-  <div>
-    <UIPage>
+  <div >
+   
       <div class="row options border">
-        <div class="col-lg-8 col-md-6 col-sm-10 order-1-sm">
-          <!-- search bar for dates -->
+        <div class="col-lg-8">
+          <div class=""> 
+            <el-date-picker
+                v-model="date"
+                placeholder="Pick a date"
+                format="MM/DD/YYYY"
+                value-format="MM/DD/YYYY"
+             
+              />
 
-          <div>Menu</div>
-          <div class="row d-flex justify-content-center">
-            <div class="options col-4 col-md-4 col-sm-12 my-2">
-              <NuxtLink class="option">
-                <el-button>Reservations</el-button>
-              </NuxtLink>
-            </div>
+            <el-time-select
+            class="round"
+                v-model="time"
+                start="10:00"
+                step="01:30"
+                end="20:30"
+                placeholder="Select time"
+                format="hh:mm A"
+              
+              />
 
-            <div class="options col-4 col-md-4 col-sm-12 my-2">
-              <NuxtLink class="option">
-                <el-button>Last 3 months</el-button>
-              </NuxtLink>
-            </div>
-
-            <div class="options col-4 col-md-4 col-sm-12 my-2">
-              <NuxtLink class="option">
-                <el-button>Message</el-button>
-              </NuxtLink>
-            </div>
           </div>
-          <!-- info for display -->
-          <div class="row">
-            <div class="details col-lg-5 mt-1 mx-auto">
-              <h4 class="title">Up coming reservation</h4>
-              <div>
-                <h6 class="date">Jun 24, 2023</h6>
-                <h6 class="time">06:30 PM</h6>
-                <p class="info">Coloring and bleaching</p>
-              </div>
-            </div>
-            <div class="details col-lg-5 mt-1 mx-auto">
-              <h4 class="title">latest appointment</h4>
-              <div>
-                <h6 class="date">Jun 24, 2023</h6>
-                <h6 class="time">06:30 PM</h6>
-                <p class="info">Coloring and bleaching</p>
-              </div>
-            </div>
-            <!-- last 3 visits details -->
-            <div class="row">
-              <div class="details d-flex justify-content-center flex-wrap">
-                <h4 class="title">last 3 visits</h4>
-                <div class="info border mt-2 px-2 py-1 col-sm-12">
-                  <h6 class="date">Jun 24, 2023</h6>
-                  <h6 class="time">06:30 PM</h6>
-                </div>
-                <div class="info border mt-2 px-2 py-1 col-sm-12">
-                  <h6 class="date">Jun 24, 2023</h6>
-                  <h6 class="time">06:30 PM</h6>
-                </div>
-                <div class="info border mt-2 px-2 py-1 col-sm-12">
-                  <h6 class="date">Jun 24, 2023</h6>
-                  <h6 class="time">06:30 PM</h6>
-                </div>
-              </div>
-            </div>
-          </div>
+1
+    
         </div>
 
-        <!-- dates sections -->
-        <div class="col-lg-4 col-md-6 col-sm-10">
-          {{ dd.getHours() }}
+        <div class="col-lg-4 ">
+          <div class="mx-4">
+          <!-- {{ dd.getHours() }}
           {{ dd.getMinutes() }}
-          {{ dd.getSeconds() }}
+          {{ dd.getSeconds() }}--->
           {{ timeFormat(new Date()) }}
           {{ time }}
+          {{ date }}
 
-          <form class="select-dates-form dates-border mt-1 px-1">
-            <div class="block">
+          <form
+            @submit.prevent="submitHandler"
+            class="select-dates-form dates-border mt-1 px-1"
+          >
+            <div class="mx-3">
               <div>Select date</div>
               <!-- Will be in separate component DATE -->
               <el-date-picker
                 v-model="date"
-                type="date"
                 placeholder="Pick a date"
                 format="MM/DD/YYYY"
                 value-format="MM/DD/YYYY"
+             
+              />
+              <!-- will be in separate component TIME-->
+              <el-time-select
+                v-model="time"
+                start="10:00"
+                step="01:30"
+                end="20:30"
+                placeholder="Select time"
+                format="hh:mm A"
+              
               />
             </div>
-            <!-- will be in separate component TIME-->
-            <el-time-select
-              v-model="time"
-              start="10:00"
-              step="01:30"
-              end="20:30"
-              placeholder="Select time"
-              format="hh:mm A"
-            />
 
-            <div class="selected-dates col">
+            <div class="selected-dates mx-2 my-4">
               <div class="dates" v-for="date in dateForm" :key="date">
                 <div class="available-dates">
-                  <input
-                    type="radio"
-                    :value="date.time"
-                    v-model="mm"
-                    class="mx-2"
-                  />
-                  <span>{{ date.name }} </span> -
-                  <span>{{ date.date }} </span> -
+                  <input type="radio" :value="date.time" v-model="mm" class="mx-1" />
+                  <span>{{ date.name }} </span> - <span>{{ date.date }} </span> -
                   <span>{{ date.time }} </span>
                 </div>
               </div>
             </div>
 
-            <el-button>Submit</el-button>
+            <el-button class="mx-3" @click="submitHandler">Submit</el-button>
           </form>
         </div>
+        </div>
+
+        <!-- dates sections -->
+   
+
+
       </div>
-    </UIPage>
+  
   </div>
 </template>
 <style scoped>
+
+.round{
+  border-radius: 15px;
+ border: solid red 1px;}
 .details {
   border: solid rgb(185, 185, 185, 0.6) 1px;
   border-radius: 8px;
@@ -178,11 +181,15 @@ const timeFormat = (date) => {
 }
 
 .dates {
-  width: auto;
-  margin: 0 auto;
+  width: 20rem;
+ 
+
+  
 }
 .selected-dates {
-  margin: 0 auto;
+
+  width: 20rem;
+  /* border: solid red 1px; */
 }
 .select-dates-form {
   border-radius: 10px;
@@ -195,7 +202,7 @@ const timeFormat = (date) => {
   border: solid rgba(230, 230, 230, 0.8) 1px;
   border-radius: 5px;
   padding: 0 1rem;
-  margin: 0.7rem 0;
+  margin: 0.8rem 0;
   width: auto;
   list-style: none;
   color: rgb(88, 87, 87);
@@ -221,7 +228,7 @@ const timeFormat = (date) => {
   border: blue 1px solid;
 }
 
+
+
 /* dates section */
-.dates-border {
-}
 </style>
