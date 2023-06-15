@@ -1,6 +1,6 @@
 <template>
     <div>
-<UINavbar></UINavbar>
+<!-- <UINavbar></UINavbar> -->
 DEFAULT LAYOUT
         <slot />
     </div>

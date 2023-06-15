@@ -10,7 +10,7 @@ interface Reservation {
 
 // const date = ref(new Date().toLocaleDateString());
 
-const date = ref("");
+const date = ref(""); //testing time picker
 const time = ref(""); //testing time picker
 
 //function used to clear inputs adter submitted
@@ -39,11 +39,7 @@ const submitHandler = () => {
 //   date.value = fullDate
 //   return fullDate.toString()
 
-const mm = ref("");
-
 const dateForm = computed(() => dates.filter((el) => el.date === date.value)); //displays the dates entered in date
-
-const dd = ref(new Date());
 
 const timeFormat = (date) => {
   let hours = date.getHours();
@@ -65,103 +61,128 @@ const timeFormat = (date) => {
 <template>
   <div class="wrapper">
     <div class="inner-wrapper">
-      <div class="option-box">
-        <div class="box">Menu</div>
-        <div class="box">Next reservation</div>
-        <div class="box">Last reservation</div>
-        <div class="box">Last 3 months</div>
+      <div class="option-box row">
+        <div class="box col col-lg-3 col-md-6 col-sm-6">Menu</div>
+        <div class="box col col-lg-3 col-md-6 col-sm-6">Next reservation</div>
+        <div class="box col col-lg-3 col-md-6 col-sm-6">Last reservation</div>
+        <div class="box col col-lg-3 col-md-6 col-sm-6">Last 3 months</div>
       </div>
 
-      <div class="calendar row">
-        <div class="calendar-wrapper col-lg-6">
-          <div class="">
+      <form class="calendar ">
+        <div class="calendar-wrapper col-lg-6 col-sm-12">
+          <div class="pickers">
+
+            
             <el-date-picker
+    
               v-model="date"
-              type="week"
+              type="date"
+              placeholder="Pick a Date"
               format="MM/DD/YYYY"
-              placeholder="Pick a week"
+              value-format="MM/DD/YYYY"
+            />
+
+            <el-time-select
+           
+              v-model="time"
+              start="10:30"
+              step="01:30"
+              end="18:30"
+              placeholder="Select time"
             />
           </div>
-
-   <div>           <el-time-select
-    v-model="time"
-    start="08:30"
-    step="00:15"
-    end="18:30"
-    placeholder="Select time"
-  /></div>
         </div>
-        <div class="dates-selection col-lg-6">
-          <div class="wrp" v-for="items in dates" :key="items">
-            <div class="dates">
-              <el-button>
-                {{ items.date }}
-              </el-button>
+
+        <div class="date col-lg-6  col">
+          <div class="dates-title">Available Dates</div>
+          <div class="dates-selection">
+            <div class="wrp" v-for="items in dateForm" :key="items">
+              <div class="dates">
+                <el-button>
+                  {{ items.date }}
+                </el-button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </form>
+      {{ time }} ====
+      {{ timeFormat(new Date()) }}
+      xxx==== {{ date }}
     </div>
   </div>
 </template>
 <style scoped>
 .wrapper {
-  max-width: 97%;
+  max-width: auto;
   margin: 0 auto;
   border: solid red 1px;
-  height: 50rem;
+
+  height: 100vh;
   border-radius: 10px;
   padding: 0 0.5rem;
 }
 
 .option-box {
   display: flex;
-  justify-content: center;
+  justify-content:space-evenly;
   flex-wrap: wrap;
-  border: solid blue 1px;
-
-  max-width: 50em;
-  margin: 2rem auto;
+  /* border: solid rgb(129, 129, 129) 1px; */
+  max-width: 50rem;
+  margin: 1rem auto;
+  padding: 1rem;
+ 
 }
 .option-box .box {
-  min-width: 5rem;
-  display: flex;
-  justify-content: evenly;
-  flex-wrap: wrap;
   border: solid green 1px;
-  align-content: center;
-  margin: auto 1rem;
-  padding: 0.5rem;
-  border-radius: 10px;
-  align-items: left;
+ text-align: center;
+ 
+margin: 0.2rem;
+  padding: 0.1rem auto;
+  border-radius: 5px;
+  width: 7rem;
+
 }
 
 .calendar {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  border: solid rgb(221, 221, 221) 1px;
+  /* border: solid rgb(161, 10, 221) 1px; */
 
   max-width: 50em;
-  margin: 2rem auto;
+  /* padding: 0.5rem 0; */
+  margin: 1rem auto;/**0 when is mobile */
+  padding: 0 0.8rem; 
 }
 
-.calendar-wrapper{
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-
-
-
+.calendar-wrapper {
+  border: solid rgb(129, 129, 129) 1px;
+  border-radius: 10px;
+  min-height: 5rem;
+  margin: 1.5rem 0;
+  align-content: center;
 }
 .dates-selection {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   flex-wrap: wrap;
-}
-.wrp {
+  min-height: 5rem;
+  border: solid red 1px;
+  border-radius: 10px;
+  align-content: center;
+
+  /* padding: 0.5rem 0.8rem; */
 }
 
 .dates {
+  margin: 0.3rem;
+}
+
+.pickers {
+  margin: 1rem auto;
+}
+.dates-title {
+  text-align: center;
 }
 </style>
