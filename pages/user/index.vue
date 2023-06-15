@@ -30,7 +30,7 @@ const submitHandler = () => {
 
   clearInputs();
 };
-
+//will be converted into a composable
 // const dateFormat = computed(()=>{
 //   let year = date.value.slice(0,4)
 //   let day = date.value.slice(8,10)
@@ -63,172 +63,105 @@ const timeFormat = (date) => {
 </script>
 
 <template>
-  <div >
-   
-      <div class="row options border">
-        <div class="col-lg-8">
-          <div class=""> 
-            <el-date-picker
-                v-model="date"
-                placeholder="Pick a date"
-                format="MM/DD/YYYY"
-                value-format="MM/DD/YYYY"
-             
-              />
-
-            <el-time-select
-            class="round"
-                v-model="time"
-                start="10:00"
-                step="01:30"
-                end="20:30"
-                placeholder="Select time"
-                format="hh:mm A"
-              
-              />
-
-          </div>
-1
-    
-        </div>
-
-        <div class="col-lg-4 ">
-          <div class="mx-4">
-          <!-- {{ dd.getHours() }}
-          {{ dd.getMinutes() }}
-          {{ dd.getSeconds() }}--->
-          {{ timeFormat(new Date()) }}
-          {{ time }}
-          {{ date }}
-
-          <form
-            @submit.prevent="submitHandler"
-            class="select-dates-form dates-border mt-1 px-1"
-          >
-            <div class="mx-3">
-              <div>Select date</div>
-              <!-- Will be in separate component DATE -->
-              <el-date-picker
-                v-model="date"
-                placeholder="Pick a date"
-                format="MM/DD/YYYY"
-                value-format="MM/DD/YYYY"
-             
-              />
-              <!-- will be in separate component TIME-->
-              <el-time-select
-                v-model="time"
-                start="10:00"
-                step="01:30"
-                end="20:30"
-                placeholder="Select time"
-                format="hh:mm A"
-              
-              />
-            </div>
-
-            <div class="selected-dates mx-2 my-4">
-              <div class="dates" v-for="date in dateForm" :key="date">
-                <div class="available-dates">
-                  <input type="radio" :value="date.time" v-model="mm" class="mx-1" />
-                  <span>{{ date.name }} </span> - <span>{{ date.date }} </span> -
-                  <span>{{ date.time }} </span>
-                </div>
-              </div>
-            </div>
-
-            <el-button class="mx-3" @click="submitHandler">Submit</el-button>
-          </form>
-        </div>
-        </div>
-
-        <!-- dates sections -->
-   
-
-
+  <div class="wrapper">
+    <div class="inner-wrapper">
+      <div class="option-box">
+        <div class="box">Menu</div>
+        <div class="box">Next reservation</div>
+        <div class="box">Last reservation</div>
+        <div class="box">Last 3 months</div>
       </div>
-  
+
+      <div class="calendar row">
+        <div class="calendar-wrapper col-lg-6">
+          <div class="">
+            <el-date-picker
+              v-model="date"
+              type="week"
+              format="MM/DD/YYYY"
+              placeholder="Pick a week"
+            />
+          </div>
+
+   <div>           <el-time-select
+    v-model="time"
+    start="08:30"
+    step="00:15"
+    end="18:30"
+    placeholder="Select time"
+  /></div>
+        </div>
+        <div class="dates-selection col-lg-6">
+          <div class="wrp" v-for="items in dates" :key="items">
+            <div class="dates">
+              <el-button>
+                {{ items.date }}
+              </el-button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <style scoped>
-
-.round{
-  border-radius: 15px;
- border: solid red 1px;}
-.details {
-  border: solid rgb(185, 185, 185, 0.6) 1px;
-  border-radius: 8px;
-}
-.info {
-  width: 100%;
-}
-.details .title {
-  font-size: 0.9rem;
-  font-weight: 500;
-}
-.details .date,
-.time,
-.info {
-  font-size: 0.8rem;
-  font-weight: 500;
-  color: rgb(78, 77, 77);
-}
-.details .date,
-.time {
-  font-size: 0.8rem;
-  font-weight: 500;
-  color: rgb(78, 77, 77);
-}
-
-.dates {
-  width: 20rem;
- 
-
-  
-}
-.selected-dates {
-
-  width: 20rem;
-  /* border: solid red 1px; */
-}
-.select-dates-form {
+.wrapper {
+  max-width: 97%;
+  margin: 0 auto;
+  border: solid red 1px;
+  height: 50rem;
   border-radius: 10px;
-  padding: 0.5rem 0;
-  width: 100%;
-  border: solid rgb(196, 196, 196, 0.7) 1px;
+  padding: 0 0.5rem;
 }
 
-.available-dates {
-  border: solid rgba(230, 230, 230, 0.8) 1px;
-  border-radius: 5px;
-  padding: 0 1rem;
-  margin: 0.8rem 0;
-  width: auto;
-  list-style: none;
-  color: rgb(88, 87, 87);
-  font-size: 0.8rem;
+.option-box {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  border: solid blue 1px;
+
+  max-width: 50em;
+  margin: 2rem auto;
+}
+.option-box .box {
+  min-width: 5rem;
+  display: flex;
+  justify-content: evenly;
+  flex-wrap: wrap;
+  border: solid green 1px;
+  align-content: center;
+  margin: auto 1rem;
+  padding: 0.5rem;
+  border-radius: 10px;
+  align-items: left;
 }
 
-.main-section {
-  border: solid red 1px;
-  width: 60%;
-  margin: 0 0.5rem;
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  border: solid rgb(221, 221, 221) 1px;
+
+  max-width: 50em;
+  margin: 2rem auto;
 }
 
-.secondary-section {
-  border: solid red 1px;
-  width: 20%;
+.calendar-wrapper{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+
+
+}
+.dates-selection {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
 }
-
-.box {
-  width: 25%;
-  border: blue 1px solid;
+.wrp {
 }
 
-
-
-/* dates section */
+.dates {
+}
 </style>
