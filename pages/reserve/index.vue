@@ -62,18 +62,37 @@ const timeFormat = (date) => {
   <div class="wrapper">
     <div class="inner-wrapper">
       <div class="option-box row">
-        <div class="box col col-lg-3 col-md-6 col-sm-6">Menu</div>
-        <div class="box col col-lg-3 col-md-6 col-sm-6">Next reservation</div>
-        <div class="box col col-lg-3 col-md-6 col-sm-6">Last reservation</div>
-        <div class="box col col-lg-3 col-md-6 col-sm-6">Last 3 months</div>
+        <Nuxt-link class="box col col-lg-3 col-md-6 col-sm-6" to="/">
+        </Nuxt-link>
+        <Nuxt-link class="box col col-lg-3 col-md-6 col-sm-6" to="/">
+        </Nuxt-link>
+        <Nuxt-link class="box col col-lg-3 col-md-6 col-sm-6" to="/">
+          ></Nuxt-link
+        >
+        <Nuxt-link class="box col col-lg-3 col-md-6 col-sm-6" to="/">
+        </Nuxt-link>
       </div>
 
-      <form class="calendar ">
+      <form class="calendar">
         <div class="calendar-wrapper col-lg-6 col-sm-12">
           <div class="pickers">
-
-            
-            <el-date-picker
+            <div class="input-group">
+              <div class="input-group-text">
+                <input
+                  class="form-check-input mt-0"
+                  type="radio"
+                  value=""
+                  aria-label="Radio button for following text input"
+                />
+              </div>
+              <input
+                type="date"
+                v-model="date"
+                class="form-control"
+                aria-label="Text input with radio button"
+              />
+            </div>
+            <!-- <el-date-picker
     
               v-model="date"
               type="date"
@@ -89,11 +108,11 @@ const timeFormat = (date) => {
               step="01:30"
               end="18:30"
               placeholder="Select time"
-            />
+            /> -->
           </div>
         </div>
 
-        <div class="date col-lg-6  col">
+        <div class="date col-lg-6 col">
           <div class="dates-title">Available Dates</div>
           <div class="dates-selection">
             <div class="wrp" v-for="items in dateForm" :key="items">
@@ -118,32 +137,37 @@ const timeFormat = (date) => {
   margin: 0 auto;
   border: solid red 1px;
 
-  height: 100vh;
+  height: 95vh;
   border-radius: 10px;
   padding: 0 0.5rem;
+}
+.inner-wrapper{
+    border: solid rgb(129, 129, 129) 1px;
+    margin: 5rem 0;
 }
 
 .option-box {
   display: flex;
-  justify-content:space-evenly;
+  justify-content: space-evenly;
   flex-wrap: wrap;
-  /* border: solid rgb(129, 129, 129) 1px; */
+  border: solid rgb(129, 129, 129) 1px;
   max-width: 50rem;
   margin: 1rem auto;
   padding: 1rem;
- 
 }
 .option-box .box {
-  border: solid green 1px;
- text-align: center;
- 
-margin: 0.2rem;
+  border: solid rgb(67, 90, 67) 1px;
+  text-align: center;
+
+  margin: 0.2rem;
   padding: 0.1rem auto;
   border-radius: 5px;
   width: 7rem;
-
 }
-
+.option-box .box button {
+  border: none;
+  background: transparent;
+}
 .calendar {
   display: flex;
   flex-wrap: wrap;
@@ -152,8 +176,8 @@ margin: 0.2rem;
 
   max-width: 50em;
   /* padding: 0.5rem 0; */
-  margin: 1rem auto;/**0 when is mobile */
-  padding: 0 0.8rem; 
+  margin: 1rem auto; /**0 when is mobile */
+  padding: 0 0.8rem;
 }
 
 .calendar-wrapper {
