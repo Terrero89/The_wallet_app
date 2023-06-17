@@ -28,20 +28,21 @@ const submitHandler = () => {
 
   console.log(reservation.value.date, reservation.value.time);
 
-  clearInputs();
+  // clearInputs();
 };
-//will be converted into a composable
-// const dateFormat = computed(()=>{
-//   let year = date.value.slice(0,4)
-//   let day = date.value.slice(8,10)
-//   let month = date.value.slice(5,7)
-//   let fullDate =  `${month}/${day}/${year}`
-//   date.value = fullDate
-//   return fullDate.toString()
+//computedto format date from input to proper input form
+const dateFormat = computed(() => {
+  let year = date.value.slice(0, 4);
+  let day = date.value.slice(8, 10);
+  let month = date.value.slice(5, 7);
+  let fullDate = `${month}/${day}/${year}`;
+  date.value = fullDate;
+  return fullDate.toString();
+});
 
 const dateForm = computed(() => dates.filter((el) => el.date === date.value)); //displays the dates entered in date
 
-const timeFormat = (date) => {
+const timeFormat = (date:any) => {
   let hours = date.getHours();
   let minutes = date.getMinutes();
   var format = hours >= 12 ? "PM" : "AM";
@@ -61,73 +62,80 @@ const timeFormat = (date) => {
 <template>
   <div class="wrapper">
     <div class="inner-wrapper">
-      <div class="option-box row">
-        <Nuxt-link class="box col col-lg-3 col-md-6 col-sm-6" to="/">
-        </Nuxt-link>
-        <Nuxt-link class="box col col-lg-3 col-md-6 col-sm-6" to="/">
-        </Nuxt-link>
-        <Nuxt-link class="box col col-lg-3 col-md-6 col-sm-6" to="/">
-          ></Nuxt-link
-        >
-        <Nuxt-link class="box col col-lg-3 col-md-6 col-sm-6" to="/">
-        </Nuxt-link>
-      </div>
-
-      <form class="calendar">
-        <div class="calendar-wrapper col-lg-6 col-sm-12">
-          <div class="pickers">
-            <div class="input-group">
-              <div class="input-group-text">
-                <input
-                  class="form-check-input mt-0"
-                  type="radio"
-                  value=""
-                  aria-label="Radio button for following text input"
-                />
-              </div>
-              <input
-                type="date"
-                v-model="date"
-                class="form-control"
-                aria-label="Text input with radio button"
-              />
-            </div>
-            <!-- <el-date-picker
-    
-              v-model="date"
-              type="date"
-              placeholder="Pick a Date"
-              format="MM/DD/YYYY"
-              value-format="MM/DD/YYYY"
-            />
-
-            <el-time-select
-           
-              v-model="time"
-              start="10:30"
-              step="01:30"
-              end="18:30"
-              placeholder="Select time"
-            /> -->
-          </div>
+      <UICard>
+        <div class="option-box">
+          <Nuxt-link class="box col col-lg-3 col-md-6 col-sm-6" to="/">
+            Reservations
+          </Nuxt-link>
+          <Nuxt-link class="box col col-lg-3 col-md-6 col-sm-6" to="/">
+            Last 3 months
+          </Nuxt-link>
+          <Nuxt-link class="box col col-lg-3 col-md-6 col-sm-6" to="/">
+            Next reservation
+          </Nuxt-link>
+          <Nuxt-link class="box col col-lg-3 col-md-6 col-sm-6" to="/">
+            Next reservation
+          </Nuxt-link>
         </div>
+      </UICard>
 
-        <div class="date col-lg-6 col">
-          <div class="dates-title">Available Dates</div>
-          <div class="dates-selection">
-            <div class="wrp" v-for="items in dateForm" :key="items">
-              <div class="dates">
-                <el-button>
-                  {{ items.date }}
-                </el-button>
+      <UICard>
+        <form class="calendar">
+          <div class="calendar-wrapper col-lg-6 col-sm-6 ">
+            <div class="pickers ">
+              <div class="input-group row">
+                <div class="col-lg-6 col-sm-6 my-1">
+                  <input
+                    type="date"
+                    v-model="date"
+                   
+                    class="form-control "
+                    aria-label="Text input with radio button"
+                  />
+                </div>
+
+                <div class=" col-lg-6 col-sm-6">
+                  <select
+                    v-model="time"
+                    class="form-select"
+                    id="inputGroupSelect01"
+                  >
+                    <option selected>Choose...</option>
+
+                    <option value="10:00">10:00 AM</option>
+                    <option value="11:30">11:30 AM</option>
+                    <option disabled value="01:00">01:00 PM</option>
+                    <option value="02:00">02:00 PM</option>
+                    <option value="03:30">03:30 PM</option>
+                    <option value="05:00">05:00 PM</option>
+                    <option value="06:30">06:30 PM</option>
+                    <option value="08:00">08:00 AM</option>
+                  </select>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </form>
-      {{ time }} ====
+
+          <div class="date col-lg-6 col-sm-12">
+            <div class="dates-title">Available Dates</div>
+            <div class="dates-selection">
+              <div class="wrp" v-for="items in dateForm" :key="items">
+                <div class="dates">
+                  <el-button>
+                    {{ items.time }}
+                  </el-button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </UICard>
+      {{ time }}
+      {{ date }}
+      {{ dateFormat }}
+      <!-- {{ time }} ====
       {{ timeFormat(new Date()) }}
-      xxx==== {{ date }}
+      xxx==== {{ date }} {{ timeFormat(new Date()) }}--- {{ dateFormat }} -->
     </div>
   </div>
 </template>
@@ -139,20 +147,16 @@ const timeFormat = (date) => {
 
   height: 95vh;
   border-radius: 10px;
-  padding: 0 0.5rem;
-}
-.inner-wrapper{
-    border: solid rgb(129, 129, 129) 1px;
-    margin: 5rem 0;
+  padding: 0 0.3rem;
 }
 
 .option-box {
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
-  border: solid rgb(129, 129, 129) 1px;
-  max-width: 50rem;
-  margin: 1rem auto;
+  /* border: solid rgb(129, 129, 129) 1px; */
+  /* max-width: 50rem; */
+  /* margin: 1rem auto; */
   padding: 1rem;
 }
 .option-box .box {
@@ -168,39 +172,38 @@ const timeFormat = (date) => {
   border: none;
   background: transparent;
 }
-.calendar {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  /* border: solid rgb(161, 10, 221) 1px; */
-
-  max-width: 50em;
-  /* padding: 0.5rem 0; */
-  margin: 1rem auto; /**0 when is mobile */
-  padding: 0 0.8rem;
-}
 
 .calendar-wrapper {
-  border: solid rgb(129, 129, 129) 1px;
+  /* border: solid rgb(129, 129, 129) 1px; */
   border-radius: 10px;
-  min-height: 5rem;
-  margin: 1.5rem 0;
-  align-content: center;
+  margin: 1.5rem auto;
+  padding: 1rem;
+  max-width: 35rem;
 }
 .dates-selection {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   flex-wrap: wrap;
   min-height: 5rem;
-  border: solid red 1px;
+  border: solid rgb(248, 248, 248) 1px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   border-radius: 10px;
-  align-content: center;
+  padding: 0.5rem;
+  margin: 0 auto;
 
   /* padding: 0.5rem 0.8rem; */
 }
 
+.form {
+  margin: 0 auto;
+}
+
 .dates {
   margin: 0.3rem;
+}
+.date {
+  margin: 0 auto;
+  max-width: 35rem;
 }
 
 .pickers {
