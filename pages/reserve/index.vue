@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useReservationsStore } from "@/stores/reservations";
 const reservationsStore = useReservationsStore();
-const { dates } = reservationsStore;
+const { dates,datesFilter } = reservationsStore;
 
 interface Reservation {
   date: string | null;
@@ -10,11 +10,20 @@ interface Reservation {
 
 // const date = ref(new Date().toLocaleDateString());
 
-const date = ref(""); //testing time picker
-const time = ref(""); //testing time picker
+const date = ref<string>(""); //testing time picker
+const time = ref<string>(""); //testing time picker
+const schedule = ref<string[]>([
+  "10:00 AM",
+  "11:30 AM",
+  "02:00 PM",
+  "03:30 PM",
+  "05:00 PM",
+  "06:30 PM",
+  "08:00 PM",
+]);
 
 //function used to clear inputs adter submitted
-const clearInputs = () => {
+const clearInputs = ():void =>{
   date.value = "";
   time.value = "";
 };
@@ -26,11 +35,12 @@ const submitHandler = () => {
     date: date.value,
   });
 
+
   console.log(reservation.value.date, reservation.value.time);
 
   // clearInputs();
 };
-//computedto format date from input to proper input form
+//computed to format date from input to proper input form
 const dateFormat = computed(() => {
   let year = date.value.slice(0, 4);
   let day = date.value.slice(8, 10);
@@ -40,9 +50,9 @@ const dateFormat = computed(() => {
   return fullDate.toString();
 });
 
-const dateForm = computed(() => dates.filter((el) => el.date === date.value)); //displays the dates entered in date
+const dateForm = computed(() => dates.filter((el) => el.date === date.value)); //displays the dates entered in date formatted
 
-const timeFormat = (date:any) => {
+const timeFormat = (date: any) => {
   let hours = date.getHours();
   let minutes = date.getMinutes();
   var format = hours >= 12 ? "PM" : "AM";
@@ -52,6 +62,8 @@ const timeFormat = (date:any) => {
   var time = hours + ":" + minutes + " " + format;
   return time;
 };
+
+//TODO: compare the dates with the dates already reserved to avoid date duplication issues
 
 // definePageMeta({
 // layout: "default",
@@ -73,36 +85,39 @@ const timeFormat = (date:any) => {
           <Nuxt-link class="box col col-lg-3 col-md-6 col-sm-6" to="/">
             Next reservation
           </Nuxt-link>
-          <Nuxt-link class="box col col-lg-3 col-md-6 col-sm-6" to="/">
-            Next reservation
-          </Nuxt-link>
         </div>
       </UICard>
+{{ datesFilter(dateFormat)}} 
+{{ compare }}
 
+      <!-- <div v-for="t in schedule" :key="t">
+        <span>{{ t }}</span>
+      </div> -->
       <UICard>
         <form class="calendar">
-          <div class="calendar-wrapper col-lg-6 col-sm-6 ">
-            <div class="pickers ">
+          <div class="calendar-wrapper col-lg-6 col-sm-6">
+            <div class="pickers">
               <div class="input-group row">
                 <div class="col-lg-6 col-sm-6 my-1">
                   <input
                     type="date"
                     v-model="date"
-                   
-                    class="form-control "
+                    placeholder="date"
+                    class="form-control"
                     aria-label="Text input with radio button"
                   />
                 </div>
 
-                <div class=" col-lg-6 col-sm-6">
+                <div class="col-lg-6 col-sm-6">
                   <select
                     v-model="time"
                     class="form-select"
                     id="inputGroupSelect01"
                   >
+                    >
                     <option selected>Choose...</option>
 
-                    <option value="10:00">10:00 AM</option>
+                    <option value="10:00 AM">10:00 AM</option>
                     <option value="11:30">11:30 AM</option>
                     <option disabled value="01:00">01:00 PM</option>
                     <option value="02:00">02:00 PM</option>
@@ -119,19 +134,20 @@ const timeFormat = (date:any) => {
           <div class="date col-lg-6 col-sm-12">
             <div class="dates-title">Available Dates</div>
             <div class="dates-selection">
-              <div class="wrp" v-for="items in dateForm" :key="items">
+              <div class="wrp" v-for="items in schedule" :key="items">
                 <div class="dates">
                   <el-button>
-                    {{ items.time }}
+                    {{ items }}
                   </el-button>
                 </div>
               </div>
             </div>
+            <el-button @click="submitHandler" > Submit</el-button>
           </div>
         </form>
       </UICard>
       {{ time }}
-      {{ date }}
+
       {{ dateFormat }}
       <!-- {{ time }} ====
       {{ timeFormat(new Date()) }}
@@ -186,7 +202,7 @@ const timeFormat = (date:any) => {
   flex-wrap: wrap;
   min-height: 5rem;
   border: solid rgb(248, 248, 248) 1px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   border-radius: 10px;
   padding: 0.5rem;
   margin: 0 auto;
