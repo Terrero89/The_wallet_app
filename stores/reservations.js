@@ -2,10 +2,15 @@ import { defineStore } from "pinia";
 
 export const useReservationsStore = defineStore("reservations", {
   state: () => ({
-    workHours: {
-      start: "10:00 AM",
-      end: "08:30 PM",
-    },
+    workingHours: [
+      "10:00 AM",
+      "11:30 AM",
+      "02:00 PM",
+      "03:30 PM",
+      "05:00 PM",
+      "06:30 PM",
+      "08:00 PM",
+    ],
     reservedDates: [
       {
         reservationId: "RES01",
@@ -122,8 +127,35 @@ export const useReservationsStore = defineStore("reservations", {
       },
     ],
   }),
-  actions: {},
+  actions: {
+    //check if time slot is available
+    reserveTimes(timeSlot) {
+      if (!this.reservedDates.includes(timeSlot)) {
+        this.reservedDates.push(timeSlot);
+      }
+    },
+    //to remove the time slot selected
+    releaseTimeSlot(timeSlot) {
+      const index = this.reserveTimes.indexOf(timeSlot);
+      if (index === -1) {
+        this.reserveDates.splice(index, 1);
+      }
+    },
+
+    reserveSlot(timeSlot) {
+      this.reservedDates.push(timeSlot);
+    },
+  },
   getters: {
+    isSlotAvailable: (state) => (date, timeSlot) => {
+      const reservationsForDate = state.reservedDates.filter((el)=> el.date === date)
+
+      if (!reservationsForDate) {
+        return true; // No reservations for the date, slot is available
+      }
+      return !reservationsForDate.includes(timeSlot);
+    },
+
     dates(state) {
       return state.reservedDates.filter((el) => el.date);
     },

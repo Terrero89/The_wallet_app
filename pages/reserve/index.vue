@@ -1,7 +1,10 @@
 <script setup lang="ts">
+import {beforeMount} from 'vue'
 import { useReservationsStore } from "@/stores/reservations";
+import { storeToRefs } from "pinia";
 const reservationsStore = useReservationsStore();
-const { dates,datesFilter } = reservationsStore;
+const { reserveTimes, reservedDates, reserveSlot, isSlotAvailable} = reservationsStore;
+const { workingHours, datesFilter, dates } = storeToRefs(reservationsStore);
 
 interface Reservation {
   date: string | null;
@@ -12,18 +15,9 @@ interface Reservation {
 
 const date = ref<string>(""); //testing time picker
 const time = ref<string>(""); //testing time picker
-const schedule = ref<string[]>([
-  "10:00 AM",
-  "11:30 AM",
-  "02:00 PM",
-  "03:30 PM",
-  "05:00 PM",
-  "06:30 PM",
-  "08:00 PM",
-]);
 
-//function used to clear inputs adter submitted
-const clearInputs = ():void =>{
+//function used to clear inputs after submitted
+const clearInputs = (): void => {
   date.value = "";
   time.value = "";
 };
@@ -34,7 +28,6 @@ const submitHandler = () => {
     time: time.value,
     date: date.value,
   });
-
 
   console.log(reservation.value.date, reservation.value.time);
 
@@ -50,7 +43,11 @@ const dateFormat = computed(() => {
   return fullDate.toString();
 });
 
-const dateForm = computed(() => dates.filter((el) => el.date === date.value)); //displays the dates entered in date formatted
+const dateForm = computed(() =>
+  dates.value.filter((el) => el.date === date.value)
+); //displays the dates entered in date formatted
+
+const unavailableDate = computed(() => {});
 
 const timeFormat = (date: any) => {
   let hours = date.getHours();
@@ -65,6 +62,13 @@ const timeFormat = (date: any) => {
 
 //TODO: compare the dates with the dates already reserved to avoid date duplication issues
 
+
+console.log("testing " + isSlotAvailable(date, workingHours))
+
+
+
+
+
 // definePageMeta({
 // layout: "default",
 // middleware: "auth",
@@ -76,28 +80,44 @@ const timeFormat = (date: any) => {
     <div class="inner-wrapper">
       <UICard>
         <div class="option-box">
-          <Nuxt-link class="box col col-lg-3 col-md-6 col-sm-6" to="/">
-            Reservations
-          </Nuxt-link>
-          <Nuxt-link class="box col col-lg-3 col-md-6 col-sm-6" to="/">
-            Last 3 months
-          </Nuxt-link>
-          <Nuxt-link class="box col col-lg-3 col-md-6 col-sm-6" to="/">
-            Next reservation
-          </Nuxt-link>
+          <!-- <button class="btn btn-outline-success px-1">
+            <Nuxt-link class="box col-lg-3 col-md-6 col-sm-6 " to="/">
+              Reservations
+            </Nuxt-link>
+          
+          </button> -->
+
+          <button class="btn btn-outline-success px-1">
+            <Nuxt-link class="box col-lg-3 col-md-6 col-sm-6" to="/">
+              Last 3 months
+            </Nuxt-link>
+          </button>
+          <button class="btn btn-outline-success px-1">
+            <Nuxt-link class="box col-lg-3 col-md-6 col-sm-6" to="/">
+              Next Reservation
+            </Nuxt-link>
+          </button>
         </div>
       </UICard>
-{{ datesFilter(dateFormat)}} 
-{{ compare }}
+     
+    
+    <h1>Available Time Slots</h1>
+    <ul >
+      <li v-for="timeSlot in workingHours" :key="timeSlot">
+        {{ timeSlot }} - {{ isSlotAvailable(dateForm, timeSlot) ? 'Available' : 'Not Available' }}
+         <button  :disabled="!isSlotAvailable(dateForm, timeSlot)">
+          Reserve
+        </button>
+      </li>
+    </ul>
 
-      <!-- <div v-for="t in schedule" :key="t">
-        <span>{{ t }}</span>
-      </div> -->
+
       <UICard>
         <form class="calendar">
           <div class="calendar-wrapper col-lg-6 col-sm-6">
             <div class="pickers">
               <div class="input-group row">
+                <h6 class="mx-auto">Select time and date</h6>
                 <div class="col-lg-6 col-sm-6 my-1">
                   <input
                     type="date"
@@ -108,23 +128,20 @@ const timeFormat = (date: any) => {
                   />
                 </div>
 
-                <div class="col-lg-6 col-sm-6">
+                <div class="col-lg-6 col-sm-6 my-1">
                   <select
                     v-model="time"
                     class="form-select"
                     id="inputGroupSelect01"
                   >
+                    <option
+                      selected
+                      v-for="hours in workingHours"
+                      :key="hours"
+                      :value="hours"
                     >
-                    <option selected>Choose...</option>
-
-                    <option value="10:00 AM">10:00 AM</option>
-                    <option value="11:30">11:30 AM</option>
-                    <option disabled value="01:00">01:00 PM</option>
-                    <option value="02:00">02:00 PM</option>
-                    <option value="03:30">03:30 PM</option>
-                    <option value="05:00">05:00 PM</option>
-                    <option value="06:30">06:30 PM</option>
-                    <option value="08:00">08:00 AM</option>
+                      {{ hours }}
+                    </option>
                   </select>
                 </div>
               </div>
@@ -132,37 +149,59 @@ const timeFormat = (date: any) => {
           </div>
 
           <div class="date col-lg-6 col-sm-12">
-            <div class="dates-title">Available Dates</div>
+            <div class="dates-title my-3">Available Hours</div>
             <div class="dates-selection">
-              <div class="wrp" v-for="items in schedule" :key="items">
+              <div class="wrp" v-for="items in workingHours" :key="items">
                 <div class="dates">
-                  <el-button>
+                  <div
+                    class="border border-success py-1 px-2 rounded-1 text"
+                    :value="items"
+                  >
+                    <input
+                      type="radio"
+                      :value="items"
+                      v-model="time"
+                      class="mx-1"
+                    />
                     {{ items }}
-                  </el-button>
+                  </div>
                 </div>
               </div>
             </div>
-            <el-button @click="submitHandler" > Submit</el-button>
+            <button
+              class="btn btn-md btn-outline-primary my-2 text"
+              @click="submitHandler"
+            >
+              Reserve
+            </button>
           </div>
         </form>
       </UICard>
-      {{ time }}
+      <!-- {{ time }}
 
       {{ dateFormat }}
-      <!-- {{ time }} ====
-      {{ timeFormat(new Date()) }}
-      xxx==== {{ date }} {{ timeFormat(new Date()) }}--- {{ dateFormat }} -->
+      {{ datesFilter(dateFormat) }}
+      {{ date }} -->
     </div>
   </div>
 </template>
 <style scoped>
+.not-available {
+  color: red;
+  border: solid blue 1px;
+}
+
+.text {
+  font-size: 0.7rem;
+}
 .wrapper {
   max-width: auto;
   margin: 0 auto;
-  border: solid red 1px;
+  border: solid rgb(240, 240, 240) 1px;
+  background-color: rgb(236, 243, 248);
 
   height: 95vh;
-  border-radius: 10px;
+  border-radius: 5px;
   padding: 0 0.3rem;
 }
 
@@ -170,19 +209,31 @@ const timeFormat = (date: any) => {
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
-  /* border: solid rgb(129, 129, 129) 1px; */
-  /* max-width: 50rem; */
-  /* margin: 1rem auto; */
-  padding: 1rem;
 }
 .option-box .box {
-  border: solid rgb(67, 90, 67) 1px;
+  font-size: 0.75rem;
+  color: rgb(61, 61, 61);
+  text-decoration: none;
+  list-style: none;
   text-align: center;
+  max-width: 2rem;
+}
+.option-box .box button {
+  font-size: 0.75rem;
+  color: rgb(61, 61, 61);
+  text-decoration: none;
+  list-style: none;
+  text-align: center;
+  max-width: 2rem;
+}
+.option-box .box {
+  width: 2rem;
+}
 
-  margin: 0.2rem;
-  padding: 0.1rem auto;
-  border-radius: 5px;
-  width: 7rem;
+.option-box .box:hover {
+  color: white;
+  border: none;
+  transition: 0.1s;
 }
 .option-box .box button {
   border: none;
@@ -191,7 +242,7 @@ const timeFormat = (date: any) => {
 
 .calendar-wrapper {
   /* border: solid rgb(129, 129, 129) 1px; */
-  border-radius: 10px;
+  border-radius: 3px;
   margin: 1.5rem auto;
   padding: 1rem;
   max-width: 35rem;
@@ -203,7 +254,7 @@ const timeFormat = (date: any) => {
   min-height: 5rem;
   border: solid rgb(248, 248, 248) 1px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-  border-radius: 10px;
+  border-radius: 3px;
   padding: 0.5rem;
   margin: 0 auto;
 
