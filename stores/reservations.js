@@ -66,44 +66,44 @@ export const useReservationsStore = defineStore("reservations", {
         reservationId: "RES09",
         name: "Yorelisa Perez",
         date: "06/03/2023",
-        time: "4:00 PM",
+        time: "04:00 PM",
       },
 
       {
         reservationId: "RES010",
         name: "Gina Alcantara",
-        date: "06/30/2023",
+        date: "07/30/2023",
         time: "10:00 AM",
       },
       {
         reservationId: "RES12",
         name: "Ezra Terrero",
-        date: "06/30/2023",
+        date: "07/30/2023",
         time: "11:30 AM",
       },
       {
         reservationId: "RES11",
         name: "Jackie Terrero",
-        date: "06/30/2023",
+        date: "07/30/2023",
         time: "02:00 PM",
       },
 
       {
         reservationId: "RES13",
         name: "Ivanoska Misuki",
-        date: "06/30/2023",
+        date: "07/30/2023",
         time: "03:30 PM",
       },
       {
         reservationId: "RES14",
         name: "Augusta Fernandez",
-        date: "06/30/2023",
+        date: "07/30/2023",
         time: "05:00 PM",
       },
       {
         reservationId: "RES15",
         name: "Yorelisa Perez",
-        date: "06/30/2023",
+        date: "07/30/2023",
         time: "06:30 PM",
       },
 
@@ -141,21 +141,34 @@ export const useReservationsStore = defineStore("reservations", {
         this.reserveDates.splice(index, 1);
       }
     },
+    //will check if there is a slot available
+    reserveSlot(date) {
+      let availableDates = []; //array with dates available for specific date slot
+      let notAvailableDates = [];
 
-    reserveSlot(timeSlot) {
-      this.reservedDates.push(timeSlot);
+      const dateReserved = this.reservedDates.filter((d) => d.date === date); // will retrieve dates for specific date arg
+
+      //will iterate and add the times reserved in available dates
+      dateReserved.forEach((item, i) => {
+        notAvailableDates.push( item.time);
+        console.log("time =" + i + " " +  item.time);
+      });
+      this.workingHours.forEach((item) => {
+        console.log(item);
+ 
+      });
+
+      if(availableDates.includes(notAvailableDates)){
+        console.log("GOOD")
+      }else{
+        console.log("AVAILABLE")
+      }
+
+
+      return dateReserved;
     },
   },
   getters: {
-    isSlotAvailable: (state) => (date, timeSlot) => {
-      const reservationsForDate = state.reservedDates.filter((el)=> el.date === date)
-
-      if (!reservationsForDate) {
-        return true; // No reservations for the date, slot is available
-      }
-      return !reservationsForDate.includes(timeSlot);
-    },
-
     dates(state) {
       return state.reservedDates.filter((el) => el.date);
     },

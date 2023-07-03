@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import {beforeMount} from 'vue'
+
 import { useReservationsStore } from "@/stores/reservations";
 import { storeToRefs } from "pinia";
 const reservationsStore = useReservationsStore();
-const { reserveTimes, reservedDates, reserveSlot, isSlotAvailable} = reservationsStore;
+const { reserveTimes, reservedDates, reserveSlot} = reservationsStore;
 const { workingHours, datesFilter, dates } = storeToRefs(reservationsStore);
 
 interface Reservation {
@@ -47,46 +47,41 @@ const dateForm = computed(() =>
   dates.value.filter((el) => el.date === date.value)
 ); //displays the dates entered in date formatted
 
-const unavailableDate = computed(() => {});
+const timeFormat = computed(() => time.value.toString())
 
-const timeFormat = (date: any) => {
-  let hours = date.getHours();
-  let minutes = date.getMinutes();
-  var format = hours >= 12 ? "PM" : "AM";
-  hours = hours % 12;
-  hours = hours ? hours : 12; // the hour '0' should be '12'
-  minutes = minutes < 10 ? "0" + minutes : minutes;
-  var time = hours + ":" + minutes + " " + format;
-  return time;
-};
+
+// const timeFormat = (date: any) => {
+//   let hours = date.getHours();
+//   let minutes = date.getMinutes();
+//   let format = hours >= 12 ? "PM" : "AM";
+//   hours = hours % 12;
+//   hours = hours ? hours : 12; // the hour '0' should be '12'
+//   minutes = minutes < 10 ? "0" + minutes : minutes;
+//   var time = hours + ":" + minutes + " " + format;
+
+//   return time;
+// };
 
 //TODO: compare the dates with the dates already reserved to avoid date duplication issues
 
 
-console.log("testing " + isSlotAvailable(date, workingHours))
 
 
 
 
-
+// console.log(addon)
 // definePageMeta({
 // layout: "default",
 // middleware: "auth",
 // });
 </script>
-
+x
 <template>
   <div class="wrapper">
     <div class="inner-wrapper">
       <UICard>
         <div class="option-box">
-          <!-- <button class="btn btn-outline-success px-1">
-            <Nuxt-link class="box col-lg-3 col-md-6 col-sm-6 " to="/">
-              Reservations
-            </Nuxt-link>
-          
-          </button> -->
-
+        
           <button class="btn btn-outline-success px-1">
             <Nuxt-link class="box col-lg-3 col-md-6 col-sm-6" to="/">
               Last 3 months
@@ -99,17 +94,21 @@ console.log("testing " + isSlotAvailable(date, workingHours))
           </button>
         </div>
       </UICard>
-     
-    
+
+    <!-- {{ datesFilter("07/30/2023")}} -->
+  
+{{ dateFormat }} 
+{{ timeFormat }}
+  {{ reserveSlot(dateFormat) }}
     <h1>Available Time Slots</h1>
-    <ul >
+    <!-- <ul >
       <li v-for="timeSlot in workingHours" :key="timeSlot">
-        {{ timeSlot }} - {{ isSlotAvailable(dateForm, timeSlot) ? 'Available' : 'Not Available' }}
-         <button  :disabled="!isSlotAvailable(dateForm, timeSlot)">
+        {{ timeSlot }} - {{ isSlotAvailable(dateForm) ? 'Available' : 'Not Available' }}
+        <button  :disabled="isSlotAvailable(date)">
           Reserve
-        </button>
+        </button> 
       </li>
-    </ul>
+    </ul> -->
 
 
       <UICard>
