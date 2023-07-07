@@ -1,3 +1,4 @@
+
 import { defineStore } from "pinia";
 
 export const useReservationsStore = defineStore("reservations", {
@@ -141,34 +142,46 @@ export const useReservationsStore = defineStore("reservations", {
         this.reserveDates.splice(index, 1);
       }
     },
-    //will check if there is a slot available
+//will check if there is a slot available
     reserveSlot(date) {
-      let availableDates = []; //array with dates available for specific date slot
-      let notAvailableDates = [];
-
-      const dateReserved = this.reservedDates.filter((d) => d.date === date); // will retrieve dates for specific date arg
-
-      //will iterate and add the times reserved in available dates
-      dateReserved.forEach((item, i) => {
-        notAvailableDates.push( item.time);
-        console.log("time =" + i + " " +  item.time);
-      });
-      this.workingHours.forEach((item) => {
-        console.log(item);
- 
-      });
-
-      if(availableDates.includes(notAvailableDates)){
-        console.log("GOOD")
-      }else{
-        console.log("AVAILABLE")
-      }
+      let availableDates = [] //array with dates available for specific date slot
+      let noAvailableDates =[] //array with dates available
+   
+      const dateReserved = this.reservedDates.filter((d)=> d.date === date);  // will retrieve dates for specific date arg
 
 
-      return dateReserved;
+    for(let i = 0; i < dateReserved.length; i++) {
+      console.log(dateReserved[i].time)
+      noAvailableDates.push(dateReserved[i].time)
+    }
+
+    this.workingHours.forEach((item, i) =>{
+      if(item !== noAvailableDates[i]){
+        console.log( "date Available - " + item)
+        availableDates.push(item)
+    }else{
+        console.log("date NOT available - " + item)
+        availableDates.push(item)
+       
+    }
+      
+  })
+   
+    if(availableDates.includes(noAvailableDates)){
+      return true
+    }else{
+      return false
+    }
+      
+      
+      return 
     },
+
+
   },
   getters: {
+
+
     dates(state) {
       return state.reservedDates.filter((el) => el.date);
     },

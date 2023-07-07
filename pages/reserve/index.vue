@@ -50,6 +50,7 @@ const dateForm = computed(() =>
 const timeFormat = computed(() => time.value.toString())
 
 
+
 // const timeFormat = (date: any) => {
 //   let hours = date.getHours();
 //   let minutes = date.getMinutes();
@@ -99,7 +100,7 @@ x
   
 {{ dateFormat }} 
 {{ timeFormat }}
-  {{ reserveSlot(dateFormat) }}
+  {{ reserveSlot( dateFormat) }}
     <h1>Available Time Slots</h1>
     <!-- <ul >
       <li v-for="timeSlot in workingHours" :key="timeSlot">
