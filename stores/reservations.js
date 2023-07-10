@@ -1,8 +1,8 @@
-
 import { defineStore } from "pinia";
 
 export const useReservationsStore = defineStore("reservations", {
   state: () => ({
+
     workingHours: [
       "10:00 AM",
       "11:30 AM",
@@ -108,12 +108,12 @@ export const useReservationsStore = defineStore("reservations", {
         time: "06:30 PM",
       },
 
-      {
-        reservationId: "RES16",
-        name: "Melinda rosa",
-        date: "07/01/2023",
-        time: "04:00 PM",
-      },
+      // {
+      //   reservationId: "RES16",
+      //   name: "Melinda rosa",
+      //   date: "07/30/2023",
+      //   time: "08:00 PM",
+      // },
       {
         reservationId: "RES17",
         name: "Augusta Fernandez",
@@ -130,58 +130,55 @@ export const useReservationsStore = defineStore("reservations", {
   }),
   actions: {
     //check if time slot is available
-    reserveTimes(timeSlot) {
-      if (!this.reservedDates.includes(timeSlot)) {
-        this.reservedDates.push(timeSlot);
-      }
-    },
-    //to remove the time slot selected
-    releaseTimeSlot(timeSlot) {
-      const index = this.reserveTimes.indexOf(timeSlot);
-      if (index === -1) {
-        this.reserveDates.splice(index, 1);
-      }
-    },
-//will check if there is a slot available
+    // reserveTimes(timeSlot) {
+    //   if (!this.reservedDates.includes(timeSlot)) {
+    //     this.reservedDates.push(timeSlot);
+    //   }
+    // },
+    // //to remove the time slot selected
+    // releaseTimeSlot(timeSlot) {
+    //   const index = this.reserveTimes.indexOf(timeSlot);
+    //   if (index === -1) {
+    //     this.reserveDates.splice(index, 1);
+    //   }
+    // },
+
+   
+
+    //will check if there is a slot available
     reserveSlot(date) {
-      let availableDates = [] //array with dates available for specific date slot
-      let noAvailableDates =[] //array with dates available
+      let availableDates= []; //array with dates available for specific date slot
+      let noAvailableDates= [] ; //array with dates available
+
+      const dateReserved = this.reservedDates.filter((d) => d.date === date); // will retrieve dates for specific date arg
+
+      //will iterate and extract each element from dateReserve to compare.
+      for (let i = 0; i < dateReserved.length; i++) {
+        // console.log(dateReserved[i].time)
+        noAvailableDates.push(dateReserved[i].time);
+      }
+
+      //will iterate over the 8 working hours to compare them to the ones for the specific date.
+      //if not there. will push the date and will show in render
+      this.workingHours.forEach((item, i) => {
+        if (item !== noAvailableDates[i]) {
+          // console.log(item + ": available");
+          availableDates.push(item);
+      
+        } else {
    
-      const dateReserved = this.reservedDates.filter((d)=> d.date === date);  // will retrieve dates for specific date arg
+          // console.log(item);
+          // noAvailableDates.push(item)
+        }
+      });
 
+      console.log(availableDates)
+      console.log(noAvailableDates)
 
-    for(let i = 0; i < dateReserved.length; i++) {
-      console.log(dateReserved[i].time)
-      noAvailableDates.push(dateReserved[i].time)
-    }
-
-    this.workingHours.forEach((item, i) =>{
-      if(item !== noAvailableDates[i]){
-        console.log( "date Available - " + item)
-        availableDates.push(item)
-    }else{
-        console.log("date NOT available - " + item)
-        availableDates.push(item)
-       
-    }
-      
-  })
-   
-    if(availableDates.includes(noAvailableDates)){
-      return true
-    }else{
-      return false
-    }
-      
-      
-      return 
+      return availableDates;
     },
-
-
   },
   getters: {
-
-
     dates(state) {
       return state.reservedDates.filter((el) => el.date);
     },

@@ -3,8 +3,8 @@
 import { useReservationsStore } from "@/stores/reservations";
 import { storeToRefs } from "pinia";
 const reservationsStore = useReservationsStore();
-const { reserveTimes, reservedDates, reserveSlot} = reservationsStore;
-const { workingHours, datesFilter, dates } = storeToRefs(reservationsStore);
+const { reserveTimes, reservedDates, reserveSlot,isSlotAvailable } = reservationsStore;
+const { workingHours, datesFilter, dates, } = storeToRefs(reservationsStore);
 
 interface Reservation {
   date: string | null;
@@ -34,7 +34,7 @@ const submitHandler = () => {
   // clearInputs();
 };
 //computed to format date from input to proper input form
-const dateFormat = computed(() => {
+const dateFormat = computed <string[]>(() => {
   let year = date.value.slice(0, 4);
   let day = date.value.slice(8, 10);
   let month = date.value.slice(5, 7);
@@ -47,7 +47,6 @@ const dateForm = computed(() =>
   dates.value.filter((el) => el.date === date.value)
 ); //displays the dates entered in date formatted
 
-const timeFormat = computed(() => time.value.toString())
 
 
 
@@ -97,9 +96,9 @@ x
       </UICard>
 
     <!-- {{ datesFilter("07/30/2023")}} -->
-  
-{{ dateFormat }} 
-{{ timeFormat }}
+  <!-- {{ isSlotAvailable}}
+{{ dateFormat }}  -->
+
   {{ reserveSlot( dateFormat) }}
     <h1>Available Time Slots</h1>
     <!-- <ul >
@@ -156,12 +155,15 @@ x
                   <div
                     class="border border-success py-1 px-2 rounded-1 text"
                     :value="items"
-                  >
+                    :class="items == reserveSlot(dateFormat)  ? 'noDate' : '' ">
+              
+                  
                     <input
                       type="radio"
                       :value="items"
                       v-model="time"
                       class="mx-1"
+                   
                     />
                     {{ items }}
                   </div>
@@ -278,5 +280,10 @@ x
 }
 .dates-title {
   text-align: center;
+}
+
+
+.noDate{
+background: red;
 }
 </style>
