@@ -5,16 +5,16 @@ export default defineNuxtConfig({
     '~/node_modules/bootstrap/dist/css/bootstrap.min.css',],
 
   app: {
-      layoutTransition: { name: 'layout', mode: 'out-in' }
+    layoutTransition: { name: 'layout', mode: 'out-in' }
   },
 
   modules: [
-      '@element-plus/nuxt',
-      '@pinia/nuxt',
-      
-     
+    '@element-plus/nuxt',
+    '@pinia/nuxt',
+  
 
-    ],
+
+  ],
 
   devtools: {
     enabled: true
