@@ -2,10 +2,36 @@
 import { useReservationsStore } from "@/stores/reservations";
 import { storeToRefs } from "pinia";
 const reservationsStore = useReservationsStore();
-const { reservedDates, workingHours } = reservationsStore;
+const { reservedDates, workingHours,filteredDates } = reservationsStore;
 const {} = storeToRefs(reservationsStore);
 
-const value = ref("")
+const dateInput = ref("");
+type convert = string | number;
+
+
+
+  const dateFormat = computed<string>(() => {
+      let date = new Date(dateInput.value);
+      let DD: convert= date.getDate();
+      let MM: convert = date.getMonth() + 1;
+      let YYYY: convert = date.getFullYear();
+
+      if (MM < 10) {
+        MM = `0${MM}`;
+      }
+
+      if (DD < 10) {
+        DD = `0${DD}`;
+      }
+
+      let input: string;
+      if (!isNaN(MM as number)) {
+        input = `${YYYY}-${MM}-${DD}`;
+      } else {
+        input = '';
+      }
+      return input;
+    });
 
 // definePageMeta({
 // layout: "default",
@@ -15,25 +41,35 @@ const value = ref("")
 
 <template>
   <BookingWrapper>
-      {{ value }}
-    <BookingOptions />
-  
-  <el-calendar class="t" v-model="value" />
+    <UICard>
+   <BookingOptions />
+    </UICard>
+ 
+
 
     <UICard>
+      {{ dateFormat }}
       <UIHeader title="Available Times" />
-      <BookingForm />
+      <div class="row">
+        <div class="col-sm-12 col-lg-6 r">
+          <el-calendar class="t" v-model="dateInput" />
+        </div>
+        <div class="col"><BookingForm /></div>
+      </div>
     </UICard>
+    {{ filteredDates(dateFormat) }}
   </BookingWrapper>
-
+  
 </template>
 
-
 <style scoped>
+.t {
 
-.t{
-  width: 100%;
- /* height: 100vh; */
+  border-radius: 10px;
+  border: solid rgb(199, 199, 199,0.5) 1px;
+}
+.r{
+
 }
 .not-available {
   color: red;

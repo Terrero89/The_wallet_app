@@ -7,10 +7,12 @@ const { filteredDates, reservedDates, workingHours } = reservationsStore;
 const {} = storeToRefs(reservationsStore);
 //?REFS
 const date = ref<string>("2023-07-29"); //date picker
+
+
+
 const reservations = ref<string[]>([]);
 
 //?COMPUTED PROPERTIES
-
 
 //function used to clear inputs after submitted
 const clearInputs = (): void => {
@@ -24,29 +26,25 @@ const submitHandler = () => {
 
   clearInputs();
 };
-
-
 </script>
 
 <template>
   <form class="calendar">
-    <CalendarPicker v-model="date"/>
+    <!-- <CalendarPicker v-model="date" /> -->
 
     <div class="date col-lg-6 col-sm-12">
       <div class="dates-title my-3">Available Hours</div>
-      <CalendarHours   :date-time="date"/>
-<div class="d-grid gap-2">
-  <button class="d-grid gap-2 btn btn-md btn-primary my-2 text" type="button">Submit</button>
- 
-</div>
-
- 
+      <CalendarHours :date-time="date" />
+      <div class="my-2 d-grid gap-2">
+        <button
+          class=" d-grid gap-2 btn btn-md btn-primary my-2 text"
+          type="button"
+        >
+         Make reservation
+        </button>
+      </div>
     </div>
-
   </form>
-  
-
-
 </template>
 
 <style scoped>

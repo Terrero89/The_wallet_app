@@ -143,9 +143,14 @@ export const useReservationsStore = defineStore("reservations", {
       return state.reservedDates.filter((el) => el.date);
     },
 
-   filteredDates() {
+    filteredDates() {
       return (dates) =>
         this.reservedDates.filter((date) => date.date === dates);
+    },
+
+    nextReservation() {
+      return (userId) =>
+        this.reservedDates.filter((date) => date.date === userId);
     },
   },
 });

@@ -1,7 +1,7 @@
 <template>
   <!-- pending for clean up -->
-  <UICard>
-    <div class="option-box">
+
+    <div class="option-box my-5">
       <button class="btn  px-1">
         <Nuxt-link class="box col-lg-3 col-md-6 col-sm-6" to="/">
           Last 3 months
@@ -13,7 +13,7 @@
         </Nuxt-link>
       </button>
     </div>
-  </UICard>
+  
   <!-- pending for clean up -->
 </template>
 
