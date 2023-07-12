@@ -1,7 +1,7 @@
 <template>
       <BookingWrapper>
-    reservations page
-
+    reservations 
+<UITable/>
       </BookingWrapper>
 
 </template>

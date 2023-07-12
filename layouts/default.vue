@@ -1,7 +1,8 @@
 <template>
     <div>
-<!-- <UINavbar></UINavbar> -->
-DEFAULT LAYOUT
+<UINavbar></UINavbar>
+
         <slot />
+        <UIFooter/>
     </div>
 </template>

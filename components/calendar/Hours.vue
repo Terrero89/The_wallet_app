@@ -35,9 +35,10 @@ const getSlots = (date: string): string[] => {
 <template>
   <div class="dates-selection">
     <div class="wrp" v-for="(times) in workingHours" :key="times">
-      <div class="dates">
+      <div class="dates" >
         <div class="border border-gray  py-1 px-2 rounded-1 text">
-          <input type="radio" disabled :value="times" v-model="timeSlot" class="mx-1" />
+          <input type="radio"  :value="times" v-model="timeSlot" class="mx-1" />
+          
           {{ times }}
         </div>
       </div>
@@ -50,7 +51,9 @@ const getSlots = (date: string): string[] => {
 </template>
 
 <style scoped>
-
+.red{
+  background-color: red;
+}
 .dates {
   margin: 0.3rem;
 }

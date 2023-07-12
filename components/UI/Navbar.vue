@@ -22,7 +22,7 @@ const name = needsProfile()
         </ul>
       </div>
 
-      <NuxtLink v-if="!auth" to="/login" class="login-btn">
+      <!-- <NuxtLink v-if="!auth" to="/login" class="login-btn">
         <el-button class="login-btn">Login</el-button></NuxtLink
       >
       <NuxtLink v-if="auth" to="/login" @click="logout" class="login-btn">
@@ -30,7 +30,7 @@ const name = needsProfile()
       >
       <NuxtLink to="/signup" class="signup-btn">
         <el-button type="info" class="signup-btn">Sign up</el-button></NuxtLink
-      >
+      > -->
     </nav>
   </header>
 </template>
@@ -45,12 +45,12 @@ const name = needsProfile()
 }
 
 .nav-logo a {
-  color: black;
+  color: rgb(252, 252, 252);
   text-decoration: none;
 }
 .navbar {
-  background-color: #f2f2f2;
-  padding: 12px 35px;
+  background-color: #0bb1fd;
+  padding: 8px 35px;
   display: flex;
   justify-content: center;
   align-items: center;

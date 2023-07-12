@@ -1,37 +1,36 @@
 <script setup lang="ts">
+import { ref, computed } from "vue";
 import { useReservationsStore } from "@/stores/reservations";
 import { storeToRefs } from "pinia";
 const reservationsStore = useReservationsStore();
-const { reservedDates, workingHours,filteredDates } = reservationsStore;
+const { reservedDates, workingHours, filteredDates } = reservationsStore;
 const {} = storeToRefs(reservationsStore);
 
-const dateInput = ref("");
+const dateInput = ref<string>("");
 type convert = string | number;
 
+const dateFormat = computed<string>(() => {
+  let date = new Date(dateInput.value);
+  let DD: convert = date.getDate();
+  let MM: convert = date.getMonth() + 1;
+  let YYYY: convert = date.getFullYear();
 
+  if (MM < 10) {
+    MM = `0${MM}`;
+  }
 
-  const dateFormat = computed<string>(() => {
-      let date = new Date(dateInput.value);
-      let DD: convert= date.getDate();
-      let MM: convert = date.getMonth() + 1;
-      let YYYY: convert = date.getFullYear();
+  if (DD < 10) {
+    DD = `0${DD}`;
+  }
 
-      if (MM < 10) {
-        MM = `0${MM}`;
-      }
-
-      if (DD < 10) {
-        DD = `0${DD}`;
-      }
-
-      let input: string;
-      if (!isNaN(MM as number)) {
-        input = `${YYYY}-${MM}-${DD}`;
-      } else {
-        input = '';
-      }
-      return input;
-    });
+  let input: string;
+  if (!isNaN(MM as number)) {
+    input = `${YYYY}-${MM}-${DD}`;
+  } else {
+    input = "";
+  }
+  return input;
+});
 
 // definePageMeta({
 // layout: "default",
@@ -42,34 +41,45 @@ type convert = string | number;
 <template>
   <BookingWrapper>
     <UICard>
-   <BookingOptions />
+      <BookingOptions />
     </UICard>
- 
-
 
     <UICard>
       {{ dateFormat }}
       <UIHeader title="Available Times" />
       <div class="row">
         <div class="col-sm-12 col-lg-6 r">
-          <el-calendar class="t" v-model="dateInput" />
+       
+            <el-calendar  class="t" v-model="dateInput">
+    <template #date-cell="{ data }" >
+      <p :class="data.isSelected ? 'is-selected' : ''">
+        {{ data.day.slice(9-11)}}
+        {{ data.isSelected ? '✔️' : '' }}
+      </p>
+    </template>
+  </el-calendar>
         </div>
         <div class="col"><BookingForm /></div>
       </div>
     </UICard>
     {{ filteredDates(dateFormat) }}
   </BookingWrapper>
-  
 </template>
 
 <style scoped>
 .t {
-
   border-radius: 10px;
-  border: solid rgb(199, 199, 199,0.5) 1px;
+  border: solid rgb(199, 199, 199, 0.5) 1px;
+   font-size:x-small;
 }
-.r{
 
+@media screen and (max-width: 450px) {
+  .t{
+   font-size:xx-small;
+
+  }
+} 
+.r {
 }
 .not-available {
   color: red;
