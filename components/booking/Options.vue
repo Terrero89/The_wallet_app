@@ -1,7 +1,7 @@
 <template>
   <!-- pending for clean up -->
 
-    <div class="option-box my-5">
+    <div class="option-box my-2">
       <button class="btn  px-1">
         <Nuxt-link class="box col-lg-3 col-md-6 col-sm-6" to="/">
           Last 3 months

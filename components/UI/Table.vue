@@ -1,78 +1,126 @@
-<template>
-  <el-table :data="filterTableData" style="width: 100%">
-     <el-table-column label="ID" prop="id" />
-    <el-table-column label="Date" prop="date" />
-    <el-table-column label="Name" prop="name" />
-      <el-table-column label="Service" prop="name" />
-       <el-table-column label="Date" prop="date" />
-    <el-table-column label="Name" prop="name" />
-      <el-table-column label="Service" prop="name" />
-    <el-table-column align="left">
-     
-      <template #header>
-        <el-input v-model="search" size="small" placeholder="Type to search" />
-      </template>
-      <template #default="scope">
-        <el-button size="small" @click="handleEdit(scope.$index, scope.row)"
-          >Edit</el-button
-        >
-        <el-button
-          size="small"
-          type="danger"
-          @click="handleDelete(scope.$index, scope.row)"
-          >Delete</el-button
-        >
-      </template>
-    </el-table-column>
-  </el-table>
-</template>
-
 <script lang="ts" setup>
-import { computed, ref } from 'vue'
+import { computed, ref } from "vue";
+
+
+const searc = ref<string>(""); //testing time picker
+
+defineProps(["modelValue", "title", "tableInfo", "filteredData"]);
+defineEmits(["update:modelValue"]);
+
+
 
 interface User {
-    id?: string
-  date: string
-  name: string
-    address: string
-  service?: string
+  userId: string;
+  resId: string;
+  date: string;
+  time: string;
+  service: string;
+  rating: number
+  review: string
+  showUp: boolean;
 }
 
-const search = ref('')
+const search = ref("");
 const filterTableData = computed(() =>
   tableData.filter(
     (data) =>
       !search.value ||
-      data.name.toLowerCase().includes(search.value.toLowerCase())
+      data.resId.toLowerCase().includes(search.value.toLowerCase())
   )
-)
-const handleEdit = (index: number, row: User) => {
-  console.log(index, row)
-}
-const handleDelete = (index: number, row: User) => {
-  console.log(index, row)
-}
+);
 
 const tableData: User[] = [
   {
-    date: '2016-05-03',
-    name: 'Tom',
-    address: 'No. 189, Grove St, Los Angeles',
+    userId: "15",
+    resId: "RES20",
+    date: "2022-03-03",
+    time: "10:00 AM",
+    service: "Haircut, Dreads, and washing",
+    rating: 5,
+    review: " great cut",
+    showUp: true,
   },
   {
-    date: '2016-05-02',
-    name: 'John',
-    address: 'No. 189, Grove St, Los Angeles',
+    userId: "15",
+    resId: "RES21",
+    date: "2023-05-03",
+    time: "03:30 PM",
+    service: "Haircut, Dreads, and washing",
+    rating: 5,
+    review: " great cut",
+    showUp: true,
   },
   {
-    date: '2016-05-04',
-    name: 'Morgan',
-    address: 'No. 189, Grove St, Los Angeles',
+    userId: "15",
+    resId: "RES22",
+    date: "2023-09-15",
+    time: "06:30 PM",
+    service: "Haircut, Dreads, and washing",
+    rating: 4.5,
+    review: " great cut",
+    showUp: true,
   },
   {
-    date: '2016-05-01',
-    name: 'Jessy',
-    address: 'No. 189, Grove St, Los Angeles',
+    userId: "15",
+    resId: "RES23",
+    date: "2023-12-24",
+    time: "08:00 PM",
+    service: "Haircut, Dreads, and washing",
+    rating: 3,
+    review: " great cut",
+    showUp: true,
   },
-]
+];
+
+const handleDelete = (index: number, row: User) => {
+  console.log(index, row.resId);
+  alert(row.resId);
+};
+
+const display = ref(false);
 </script>
+
+<template>
+  <UIHeader title="Reservations History" />
+
+<UICard>
+<ReservationsInfo/>
+</UICard>
+
+
+  <UICard class="">
+    <el-table class="table" :data="filterTableData" style="width: 100%">
+      <el-table-column  label="ResID" prop="resId" />
+      <el-table-column label="Date" prop="date" />
+      <el-table-column label="Time" prop="time" />
+      <el-table-column label="Service" prop="service" />
+      <el-table-column label="Rating" prop="rating" />
+      
+      <el-table-column label="Date" prop="date" />
+
+      <el-table-column align="left">
+        <template #header>
+          <el-input
+            v-model="search"
+            size="small"
+            placeholder="Type to search"
+          />
+        </template>
+
+        <template #default="scope">
+          <el-button
+            size="small"
+            type="primary"
+            @click="handleDelete(scope.$index, scope.row)"
+            > Details</el-button
+          >
+        </template>
+      </el-table-column>
+    </el-table>
+  </UICard>
+</template>
+
+<style scoped>
+
+
+</style>

@@ -49,6 +49,7 @@ const name = needsProfile()
   text-decoration: none;
 }
 .navbar {
+  border-radius: 0 0 10px 10px;
   background-color: #0bb1fd;
   padding: 8px 35px;
   display: flex;

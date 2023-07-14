@@ -1,11 +1,15 @@
-<script>
 
-</script>
+<script></script>
 
 <template>
-    {{ $route.params }}
-user folder
+  <div>
 
 
-    
+      <UICard>
+    <ReservationsInfo />
+  </UICard>
+  <UICard></UICard>
+  </div>
+
+
 </template>

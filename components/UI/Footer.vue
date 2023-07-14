@@ -4,7 +4,7 @@
   <div>
     <nav class="navbar px-2" id="myNavbar">
       <div class="d-flex mx-auto links d-none-sm">
-        <NuxtLink class="nav-link active" aria-current="page" to="/"
+        <NuxtLink class="nav-link active" aria-current="page" to="#"
           ><svg
             xmlns="http://www.w3.org/2000/svg"
             width="20"
@@ -20,7 +20,7 @@
         <NuxtLink
           class="nav-link active"
           aria-current="tasks-page"
-          to="/reserve"
+          to="#"
           ><svg
             xmlns="http://www.w3.org/2000/svg"
             width="20"
@@ -41,7 +41,7 @@
               d="M1.5 7a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H2a.5.5 0 0 1-.5-.5V7zM2 7h1v1H2V7zm0 3.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5H2zm1 .5H2v1h1v-1z"
             /></svg
         ></NuxtLink>
-        <NuxtLink class="nav-link active" aria-current="page" to="/
+        <NuxtLink class="nav-link active" aria-current="page" to="#
         ">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -64,7 +64,7 @@
         <NuxtLink
           class="nav-link active"
           aria-current="/"
-          to="/ "
+          to="#"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -99,6 +99,8 @@
 .icons {
 }
 .navbar {
+  z-index: 1000;
+  border-radius: 10px 10px 0 0;
   overflow: hidden;
  background-color: #0bb1fd;
   position: fixed;

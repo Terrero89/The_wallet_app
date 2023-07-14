@@ -1,4 +1,4 @@
-import { UIDialog, UITable } from '../../../../../.nuxt/components';
+
 <script></script>
 
 <template>
@@ -7,6 +7,6 @@ import { UIDialog, UITable } from '../../../../../.nuxt/components';
     resevation ID PAGE - ID:{{ $route.params.resId }}
 
 
-    <UIDialog/>
+
   </BookingWrapper>
 </template>

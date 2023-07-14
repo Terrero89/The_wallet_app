@@ -1,8 +1,5 @@
 <template>
-      <BookingWrapper>
-    reservations 
-<UITable/>
-      </BookingWrapper>
-
+  <BookingWrapper>
+    <UITable />
+  </BookingWrapper>
 </template>
-    

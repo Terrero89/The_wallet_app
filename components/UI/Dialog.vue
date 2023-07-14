@@ -3,71 +3,78 @@
 import { ref, onMounted, onBeforeMount} from 'vue'
 import { ElMessageBox } from 'element-plus'
 
-const dialogVisible = ref(true)
-const width = ref(0)
+const dialogVisible = ref<boolean>(false)
+const width = ref<number>(0)
 
-const handleClose = (done: () => void) => {
-  ElMessageBox.confirm('Are you sure to close this dialog?')
-    .then(() => {
-      done()
-    })
-    .catch(() => {
-      // catch error
-    })
-}
+// const handleClose = (done: () => void) => {
+//   ElMessageBox.confirm('Are you sure to close this dialog?')
+//     .then(() => {
+//       done()
+//     })
+//     .catch(() => {
+//       // catch error
+//     })
+// }
 
- const updateWindowWidth = computed(() => {
-      return width.value;
-    });
+//  const updateWindowWidth = computed(() => {
+//       return width.value;
+//     });
 
-    const getWindowWidth = () => {
-      width.value = window.innerWidth;
-    };
+//     const getWindowWidth = () => {
+//       width.value = window.innerWidth;
+//     };
 
-      onMounted(() => {
-      getWindowWidth();
-      window.addEventListener('resize', getWindowWidth);
-    });
+//       onMounted(() => {
+//       getWindowWidth();
+//       window.addEventListener('resize', getWindowWidth);
+//     });
 
-    onBeforeUnmount(() => {
-      window.removeEventListener('resize', getWindowWidth);
-    });
+//     onBeforeUnmount(() => {
+//       window.removeEventListener('resize', getWindowWidth);
+//     });
 
 
+const centerDialogVisible = ref(false)
 
 </script>
 <template>
-  <el-button text @click="dialogVisible = true">
-    Make Reservation
+
+  <el-button text @click="centerDialogVisible = true">
+    Click to open the Dialog
   </el-button>
 
   <el-dialog
-    v-model="dialogVisible"
-    title="Fill out some info for your appointment"
-    width="''85%"
-    :before-close="handleClose"
+    v-model="centerDialogVisible"
+    title="Warning"
+    width="30%"
+    align-center
   >
-  {{ width/10}}
-    <div>This is a message</div>
-    <div>This is a message</div>
-    <div>This is a message</div>
-    <div>This is a message</div>
-    <div>This is a message</div>
-    <template #footer>
-      <span class="dialog-footer">
-        <el-button @click="dialogVisible = false">Cancel</el-button>
-        <el-button type="primary" @click="dialogVisible = false">
-          Confirm
-        </el-button>
-      </span>
-    </template>
+    <span>Open the dialog from the center from the screen</span>
+ 
   </el-dialog>
+
 </template>
+
+<style scoped>
+
+</style>
 
 
 <style scoped>
+.dialog-footer button:first-child {
+  margin-right: 10px;
+  z-index: 1000;
+}
+.menor{
+  z-index: 10;
+}
 .t{
     width: 80%;
+}
+.dialog{
+  z-index: 10000;
+position: absolute;
+top: 50%;
 }
 .dialog-footer button:first-child {
   margin-right: 10px;

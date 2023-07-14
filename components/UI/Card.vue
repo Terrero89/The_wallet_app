@@ -11,6 +11,7 @@
   padding: 1rem;
   margin: 1rem auto;
   max-width: 65rem;
+
 }
 </style>
 
