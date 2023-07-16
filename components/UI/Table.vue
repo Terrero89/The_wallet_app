@@ -72,20 +72,22 @@ const tableData: User[] = [
   },
 ];
 
+const id = ref('')
+
 const handleDelete = (index: number, row: User) => {
   console.log(index, row.resId);
-  alert(row.resId);
+  id.value = row.resId;
+ 
+  navigateTo(`/user-15/reserve/reservations/reservation-${id.value}`)
 };
 
 const display = ref(false);
+
+const dynamicRoute = computed(()=> `user-15/reserve/reservations/reservation-${id.value}`)
 </script>
 
 <template>
   <UIHeader title="Reservations History" />
-
-<UICard>
-<ReservationsInfo/>
-</UICard>
 
 
   <UICard class="">

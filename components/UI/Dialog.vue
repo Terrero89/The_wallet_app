@@ -6,32 +6,7 @@ import { ElMessageBox } from 'element-plus'
 const dialogVisible = ref<boolean>(false)
 const width = ref<number>(0)
 
-// const handleClose = (done: () => void) => {
-//   ElMessageBox.confirm('Are you sure to close this dialog?')
-//     .then(() => {
-//       done()
-//     })
-//     .catch(() => {
-//       // catch error
-//     })
-// }
 
-//  const updateWindowWidth = computed(() => {
-//       return width.value;
-//     });
-
-//     const getWindowWidth = () => {
-//       width.value = window.innerWidth;
-//     };
-
-//       onMounted(() => {
-//       getWindowWidth();
-//       window.addEventListener('resize', getWindowWidth);
-//     });
-
-//     onBeforeUnmount(() => {
-//       window.removeEventListener('resize', getWindowWidth);
-//     });
 
 
 const centerDialogVisible = ref(false)

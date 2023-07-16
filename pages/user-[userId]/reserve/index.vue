@@ -49,15 +49,14 @@ const dateFormat = computed<string>(() => {
       <UIHeader title="Available Times" />
       <div class="row">
         <div class="col-sm-12 col-lg-6 r">
-       
-            <el-calendar  class="t" v-model="dateInput">
-    <template #date-cell="{ data }" >
-      <p :class="data.isSelected ? 'is-selected' : ''">
-        {{ data.day.slice(9-11)}}
-        {{ data.isSelected ? '✔️' : '' }}
-      </p>
-    </template>
-  </el-calendar>
+          <el-calendar class="t" v-model="dateInput">
+            <template #date-cell="{ data }">
+              <p :class="data.isSelected ? 'is-selected' : ''">
+                {{ data.day.slice(9 - 11) }}
+                {{ data.isSelected ? "✔️" : "" }}
+              </p>
+            </template>
+          </el-calendar>
         </div>
         <div class="col"><BookingForm /></div>
       </div>
@@ -70,15 +69,14 @@ const dateFormat = computed<string>(() => {
 .t {
   border-radius: 10px;
   border: solid rgb(199, 199, 199, 0.5) 1px;
-   font-size:x-small;
+  font-size: x-small;
 }
 
 @media screen and (max-width: 450px) {
-  .t{
-   font-size:xx-small;
-
+  .t {
+    font-size: xx-small;
   }
-} 
+}
 .r {
 }
 .not-available {
