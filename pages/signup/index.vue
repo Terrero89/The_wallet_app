@@ -2,7 +2,7 @@
 
 
 definePageMeta({
-  layout: "signup",
+  // layout: "signup",
 });
 </script>
 

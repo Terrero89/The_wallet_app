@@ -4,8 +4,8 @@ const authStore = useAuthStore();
 const { isLoggedIn } = useAuthStore();
 
 definePageMeta({
-  layout: "login",
-  middleware: 'auth',
+  // layout: "login",
+  // middleware: 'auth',
 });
 
 

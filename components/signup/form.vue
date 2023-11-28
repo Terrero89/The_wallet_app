@@ -1,10 +1,14 @@
 <script lang="ts" setup>
 import { useUsersStore } from "@/stores/users";
-import { storeToRefs } from 'pinia'
+import {useRegisterStore} from "@/stores/register"
+import { storeToRefs } from "pinia";
 
+const registerStore = useRegisterStore()
 const userStore = useUsersStore();
-const { users,  registeredEmails, registeredUsernames } = useUsersStore(); //
-const { signup } = userStore //destructured user store for actions.
+
+const {register, registeredEmails, registeredUsernames } = registerStore;
+const { users} = useUsersStore(); //
+const { } = userStore; //destructured user store for actions.
 
 const email = ref<string>("");
 const username = ref<string>("");
@@ -35,9 +39,8 @@ const data = () => {
 
 //will submit form when clicked submit form
 const submitForm = async () => {
-  const emailExist = await checkEmailExist(email.value);
-  const userExist = await checkUserExist(username.value);
-
+  const emailExist = await checkEmailExist(email);
+  const usernameExist = await checkUserExist(username);
   if (password.value !== password2.value) {
     error.value.match = true;
     console.log("Password or username are wrong");
@@ -46,7 +49,7 @@ const submitForm = async () => {
     error.value.email = true;
     console.log("email already Exist");
   }
-  if (userExist) {
+  if (usernameExist) {
     error.value.username = true;
     console.log("username already Exist");
   }
@@ -61,13 +64,13 @@ const submitForm = async () => {
     !error.value.password &&
     !error.value.match
   ) {
-    signup(data()); //add user signup to pinia
+    register(data()); //add user signup to pinia
     console.log("signing up....");
   }
 };
 //check if emails are already saved in DB
 const checkEmailExist = async (email) => {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+  await new Promise((resolve) => setTimeout(resolve, 10));
   const emailExist = registeredEmails.includes(email);
   console.log("EMailExist: " + emailExist);
   return emailExist;
@@ -80,7 +83,9 @@ const checkUserExist = async (username) => {
   return userExist;
 };
 
-const { data: emails } = await useFetch("https://reservation-system-api-default-rtdb.firebaseio.com/users.json")
+const { data: emails } = await useFetch(
+  "https://reservation-system-api-default-rtdb.firebaseio.com/users.json"
+);
 </script>
 
 <template>
@@ -131,15 +136,16 @@ const { data: emails } = await useFetch("https://reservation-system-api-default-
       </p>
       <button class="submit-btn" type="submit">Sign up</button>
     </form>
-    <div>{{ registeredEmails }}</div>
-    <div>{{ registeredUsernames }}</div>
+    <!--    <div>{{ registeredEmails }}</div>-->
+    <!--    <div>{{ registeredUsernames }}</div>-->
     <!-- <div v-for="user in users">
       <p>{{ user }}</p>
     </div> -->
 
     <div v-for="i in emails">
-      <span>{{ i.email}}</span>
-      <span>{{ i.username}}</span>
+      --> <span>{{ i.email }}</span
+      >--> <span>{{ i.username }}</span
+      >-->
     </div>
   </div>
 </template>
@@ -152,7 +158,7 @@ const { data: emails } = await useFetch("https://reservation-system-api-default-
   padding: 0.7rem 2rem;
   border-radius: 5px;
   margin: 2rem 0;
-  color: black;
+
   width: 100%;
   color: white;
 }
@@ -164,11 +170,10 @@ const { data: emails } = await useFetch("https://reservation-system-api-default-
   color: white;
 }
 
-
 .form {
   border: solid rgb(233, 233, 233) 1px;
-  max-width: 28rem;
-  margin: 0 auto;
+  max-width: 30rem;
+  margin: 8rem auto;
   padding: 1.5rem 1rem;
   border-radius: 10px;
   background-color: white;

@@ -1,12 +1,11 @@
 <script lang="ts" setup>
-import { computed, ref } from "vue";
+import {computed, ref} from "vue";
 
 
-const searc = ref<string>(""); //testing time picker
+
 
 defineProps(["modelValue", "title", "tableInfo", "filteredData"]);
 defineEmits(["update:modelValue"]);
-
 
 
 interface User {
@@ -22,11 +21,11 @@ interface User {
 
 const search = ref("");
 const filterTableData = computed(() =>
-  tableData.filter(
-    (data) =>
-      !search.value ||
-      data.resId.toLowerCase().includes(search.value.toLowerCase())
-  )
+    tableData.filter(
+        (data) =>
+            !search.value ||
+            data.resId.toLowerCase().includes(search.value.toLowerCase())
+    )
 );
 
 const tableData: User[] = [
@@ -77,44 +76,44 @@ const id = ref('')
 const handleDelete = (index: number, row: User) => {
   console.log(index, row.resId);
   id.value = row.resId;
- 
+
   navigateTo(`/user-15/reserve/reservations/reservation-${id.value}`)
 };
 
 const display = ref(false);
 
-const dynamicRoute = computed(()=> `user-15/reserve/reservations/reservation-${id.value}`)
+const dynamicRoute = computed(() => `user-15/reserve/reservations/reservation-${id.value}`)
 </script>
 
 <template>
-  <UIHeader title="Reservations History" />
+  <UIHeader title="Reservations History"/>
 
 
   <UICard class="">
     <el-table class="table" :data="filterTableData" style="width: 100%">
-      <el-table-column  label="ResID" prop="resId" />
-      <el-table-column label="Date" prop="date" />
-      <el-table-column label="Time" prop="time" />
-      <el-table-column label="Service" prop="service" />
-      <el-table-column label="Rating" prop="rating" />
-      
-      <el-table-column label="Date" prop="date" />
+      <el-table-column label="ResID" prop="resId"/>
+      <el-table-column label="Date" prop="date"/>
+      <el-table-column label="Time" prop="time"/>
+      <el-table-column label="Service" prop="service"/>
+      <el-table-column label="Rating" prop="rating"/>
+      <el-table-column label="Date" prop="date"/>
 
       <el-table-column align="left">
         <template #header>
           <el-input
-            v-model="search"
-            size="small"
-            placeholder="Type to search"
+              v-model="search"
+              size="small"
+              placeholder="search"
           />
         </template>
 
         <template #default="scope">
           <el-button
-            size="small"
-            type="primary"
-            @click="handleDelete(scope.$index, scope.row)"
-            > Details</el-button
+              size="small"
+              type="primary"
+              @click="handleDelete(scope.$index, scope.row)"
+          > Details
+          </el-button
           >
         </template>
       </el-table-column>

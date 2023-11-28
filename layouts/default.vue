@@ -1,8 +1,7 @@
 <template>
-    <div>
-<UINavbar></UINavbar>
-
-        <slot />
-        <UIFooter/>
-    </div>
+  <div>
+    <UINavbar/>
+    <slot/>
+    <UIFooter/>
+  </div>
 </template>

@@ -2,8 +2,8 @@
 
 <template>
   <div>
-    <jumbotron>
-      
-    </jumbotron>
+    <UIJumbotron>
+
+    </UIJumbotron>
   </div>
 </template>

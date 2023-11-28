@@ -78,7 +78,7 @@ const submitForm = () => {
   border: solid rgb(233, 233, 233) 1px;
   max-width: 30rem;
   height: 35rem;
-  margin: 0 auto;
+  margin: 8rem auto;
   padding: 4rem 2rem;
   border-radius: 10px;
   background-color: white;
