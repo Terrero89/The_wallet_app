@@ -36,8 +36,7 @@ export const useRegisterStore = defineStore("register", {
                 body: JSON.stringify(userInfo),
             });
 
-            // this.saveCredentials(userInfo.email)
-            // this.saveCredentials(userInfo.username)
+        
             this.registeredEmails.push(userData.email); //register new emails in usernames array
             this.registeredUsernames.push(userData.username); //register new username in usernames array
             this.savedCredentials(userData.email, "emails"); //

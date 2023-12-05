@@ -1,9 +1,9 @@
 {
-  "_hash": "voVqmx5rZx",
+  "_hash": "tHmsB6bkXj",
   "project": {
-    "rootDir": "/home/terrero/Documents/2- Web Development/Frontend/Vue-Nuxt/Nuxt3_tracker_app"
+    "rootDir": "/home/terrero/Documents/2- Web Development/Frontend/Vue-Nuxt/wallet_app"
   },
   "versions": {
-    "nuxt": "3.5.1"
+    "nuxt": "3.8.2"
   }
 }

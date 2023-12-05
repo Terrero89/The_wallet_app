@@ -77,7 +77,7 @@ export declare const ElProgress: import("element-plus/es/utils").SFCWithInstall<
     trailPathStyle: import("vue").ComputedRef<import("vue").CSSProperties>;
     circlePathStyle: import("vue").ComputedRef<import("vue").CSSProperties>;
     stroke: import("vue").ComputedRef<string>;
-    statusIcon: import("vue").ComputedRef<import("vue").DefineComponent<{}, {}, {}, import("vue").ComputedOptions, import("vue").MethodOptions, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{}>>, {}>>;
+    statusIcon: import("vue").ComputedRef<any>;
     progressTextSize: import("vue").ComputedRef<number>;
     content: import("vue").ComputedRef<string>;
     getColors: (color: import("./src/progress").ProgressColor[]) => import("./src/progress").ProgressColor[];

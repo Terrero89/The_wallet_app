@@ -122,11 +122,11 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
             _ctx.collapseTags && _ctx.modelValue.length > 0 ? (openBlock(), createElementBlock(Fragment, { key: 0 }, [
               (openBlock(true), createElementBlock(Fragment, null, renderList(_ctx.showTagList, (item) => {
                 return openBlock(), createElementBlock("div", {
-                  key: _ctx.getValueKey(item),
+                  key: _ctx.getValueKey(_ctx.getValue(item)),
                   class: normalizeClass(_ctx.nsSelectV2.e("selected-item"))
                 }, [
                   createVNode(_component_el_tag, {
-                    closable: !_ctx.selectDisabled && !(item == null ? void 0 : item.disable),
+                    closable: !_ctx.selectDisabled && !_ctx.getDisabled(item),
                     size: _ctx.collapseTagSize,
                     type: "info",
                     "disable-transitions": "",
@@ -138,7 +138,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
                         style: normalizeStyle({
                           maxWidth: `${_ctx.tagMaxWidth}px`
                         })
-                      }, toDisplayString(item == null ? void 0 : item.label), 7)
+                      }, toDisplayString(_ctx.getLabel(item)), 7)
                     ]),
                     _: 2
                   }, 1032, ["closable", "size", "onClose"])
@@ -169,7 +169,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
                           style: normalizeStyle({
                             maxWidth: `${_ctx.tagMaxWidth}px`
                           })
-                        }, "+ " + toDisplayString(_ctx.modelValue.length - _ctx.maxCollapseTags), 7)
+                        }, " + " + toDisplayString(_ctx.modelValue.length - _ctx.maxCollapseTags), 7)
                       ]),
                       content: withCtx(() => [
                         createElementVNode("div", {
@@ -177,11 +177,11 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
                         }, [
                           (openBlock(true), createElementBlock(Fragment, null, renderList(_ctx.collapseTagList, (selected) => {
                             return openBlock(), createElementBlock("div", {
-                              key: _ctx.getValueKey(selected),
+                              key: _ctx.getValueKey(_ctx.getValue(selected)),
                               class: normalizeClass(_ctx.nsSelectV2.e("selected-item"))
                             }, [
                               createVNode(_component_el_tag, {
-                                closable: !_ctx.selectDisabled && !selected.disabled,
+                                closable: !_ctx.selectDisabled && !_ctx.getDisabled(selected),
                                 size: _ctx.collapseTagSize,
                                 class: "in-tooltip",
                                 type: "info",
@@ -209,18 +209,18 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
                       style: normalizeStyle({
                         maxWidth: `${_ctx.tagMaxWidth}px`
                       })
-                    }, "+ " + toDisplayString(_ctx.modelValue.length - _ctx.maxCollapseTags), 7))
+                    }, " + " + toDisplayString(_ctx.modelValue.length - _ctx.maxCollapseTags), 7))
                   ]),
                   _: 1
                 }, 8, ["size"])) : createCommentVNode("v-if", true)
               ], 2)
             ], 64)) : (openBlock(true), createElementBlock(Fragment, { key: 1 }, renderList(_ctx.states.cachedOptions, (selected) => {
               return openBlock(), createElementBlock("div", {
-                key: _ctx.getValueKey(selected),
+                key: _ctx.getValueKey(_ctx.getValue(selected)),
                 class: normalizeClass(_ctx.nsSelectV2.e("selected-item"))
               }, [
                 createVNode(_component_el_tag, {
-                  closable: !_ctx.selectDisabled && !selected.disabled,
+                  closable: !_ctx.selectDisabled && !_ctx.getDisabled(selected),
                   size: _ctx.collapseTagSize,
                   type: "info",
                   "disable-transitions": "",

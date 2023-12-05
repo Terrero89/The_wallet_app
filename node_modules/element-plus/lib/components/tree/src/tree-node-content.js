@@ -23,7 +23,9 @@ const _sfc_main = vue.defineComponent({
     return () => {
       const node = props.node;
       const { data, store } = node;
-      return props.renderContent ? props.renderContent(vue.h, { _self: nodeInstance, node, data, store }) : tree.ctx.slots.default ? tree.ctx.slots.default({ node, data }) : vue.h("span", { class: ns.be("node", "label") }, [node.label]);
+      return props.renderContent ? props.renderContent(vue.h, { _self: nodeInstance, node, data, store }) : vue.renderSlot(tree.ctx.slots, "default", { node, data }, () => [
+        vue.h("span", { class: ns.be("node", "label") }, [node.label])
+      ]);
     };
   }
 });

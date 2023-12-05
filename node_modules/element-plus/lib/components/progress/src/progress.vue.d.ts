@@ -79,7 +79,7 @@ declare const _default: import("vue").DefineComponent<{
     trailPathStyle: import("vue").ComputedRef<CSSProperties>;
     circlePathStyle: import("vue").ComputedRef<CSSProperties>;
     stroke: import("vue").ComputedRef<string>;
-    statusIcon: import("vue").ComputedRef<import("vue").DefineComponent<{}, {}, {}, import("vue").ComputedOptions, import("vue").MethodOptions, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{}>>, {}>>;
+    statusIcon: import("vue").ComputedRef<any>;
     progressTextSize: import("vue").ComputedRef<number>;
     content: import("vue").ComputedRef<string>;
     getColors: (color: ProgressColor[]) => ProgressColor[];

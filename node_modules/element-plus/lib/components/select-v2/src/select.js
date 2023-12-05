@@ -126,11 +126,11 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
             _ctx.collapseTags && _ctx.modelValue.length > 0 ? (vue.openBlock(), vue.createElementBlock(vue.Fragment, { key: 0 }, [
               (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(_ctx.showTagList, (item) => {
                 return vue.openBlock(), vue.createElementBlock("div", {
-                  key: _ctx.getValueKey(item),
+                  key: _ctx.getValueKey(_ctx.getValue(item)),
                   class: vue.normalizeClass(_ctx.nsSelectV2.e("selected-item"))
                 }, [
                   vue.createVNode(_component_el_tag, {
-                    closable: !_ctx.selectDisabled && !(item == null ? void 0 : item.disable),
+                    closable: !_ctx.selectDisabled && !_ctx.getDisabled(item),
                     size: _ctx.collapseTagSize,
                     type: "info",
                     "disable-transitions": "",
@@ -142,7 +142,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
                         style: vue.normalizeStyle({
                           maxWidth: `${_ctx.tagMaxWidth}px`
                         })
-                      }, vue.toDisplayString(item == null ? void 0 : item.label), 7)
+                      }, vue.toDisplayString(_ctx.getLabel(item)), 7)
                     ]),
                     _: 2
                   }, 1032, ["closable", "size", "onClose"])
@@ -173,7 +173,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
                           style: vue.normalizeStyle({
                             maxWidth: `${_ctx.tagMaxWidth}px`
                           })
-                        }, "+ " + vue.toDisplayString(_ctx.modelValue.length - _ctx.maxCollapseTags), 7)
+                        }, " + " + vue.toDisplayString(_ctx.modelValue.length - _ctx.maxCollapseTags), 7)
                       ]),
                       content: vue.withCtx(() => [
                         vue.createElementVNode("div", {
@@ -181,11 +181,11 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
                         }, [
                           (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(_ctx.collapseTagList, (selected) => {
                             return vue.openBlock(), vue.createElementBlock("div", {
-                              key: _ctx.getValueKey(selected),
+                              key: _ctx.getValueKey(_ctx.getValue(selected)),
                               class: vue.normalizeClass(_ctx.nsSelectV2.e("selected-item"))
                             }, [
                               vue.createVNode(_component_el_tag, {
-                                closable: !_ctx.selectDisabled && !selected.disabled,
+                                closable: !_ctx.selectDisabled && !_ctx.getDisabled(selected),
                                 size: _ctx.collapseTagSize,
                                 class: "in-tooltip",
                                 type: "info",
@@ -213,18 +213,18 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
                       style: vue.normalizeStyle({
                         maxWidth: `${_ctx.tagMaxWidth}px`
                       })
-                    }, "+ " + vue.toDisplayString(_ctx.modelValue.length - _ctx.maxCollapseTags), 7))
+                    }, " + " + vue.toDisplayString(_ctx.modelValue.length - _ctx.maxCollapseTags), 7))
                   ]),
                   _: 1
                 }, 8, ["size"])) : vue.createCommentVNode("v-if", true)
               ], 2)
             ], 64)) : (vue.openBlock(true), vue.createElementBlock(vue.Fragment, { key: 1 }, vue.renderList(_ctx.states.cachedOptions, (selected) => {
               return vue.openBlock(), vue.createElementBlock("div", {
-                key: _ctx.getValueKey(selected),
+                key: _ctx.getValueKey(_ctx.getValue(selected)),
                 class: vue.normalizeClass(_ctx.nsSelectV2.e("selected-item"))
               }, [
                 vue.createVNode(_component_el_tag, {
-                  closable: !_ctx.selectDisabled && !selected.disabled,
+                  closable: !_ctx.selectDisabled && !_ctx.getDisabled(selected),
                   size: _ctx.collapseTagSize,
                   type: "info",
                   "disable-transitions": "",

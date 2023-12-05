@@ -69,14 +69,14 @@ const submitForm = async () => {
   }
 };
 //check if emails are already saved in DB
-const checkEmailExist = async (email) => {
+async function checkEmailExist(email: string) {
   await new Promise((resolve) => setTimeout(resolve, 10));
-  const emailExist = registeredEmails.includes(email);
-  console.log("EMailExist: " + emailExist);
+  const emailExist=registeredEmails.includes(email);
+  console.log("EMailExist: "+emailExist);
   return emailExist;
-};
+}
 //check if usernames are already saved in DB
-const checkUserExist = async (username) => {
+const checkUserExist = async (username: string) => {
   await new Promise((resolve) => setTimeout(resolve, 10));
   const userExist = registeredUsernames.includes(username);
   console.log("USERExist: " + userExist);

@@ -2,9 +2,11 @@ import { toRefs, computed, nextTick } from 'vue';
 import { pick } from 'lodash-unified';
 import { ElSelect } from '../../select/index.mjs';
 import '../../../hooks/index.mjs';
+import '../../../constants/index.mjs';
 import { useNamespace } from '../../../hooks/use-namespace/index.mjs';
+import { UPDATE_MODEL_EVENT } from '../../../constants/event.mjs';
 
-const useSelect = (props, { attrs }, {
+const useSelect = (props, { attrs, emit }, {
   tree,
   key
 }) => {
@@ -12,6 +14,7 @@ const useSelect = (props, { attrs }, {
   const result = {
     ...pick(toRefs(props), Object.keys(ElSelect.props)),
     ...attrs,
+    "onUpdate:modelValue": (value) => emit(UPDATE_MODEL_EVENT, value),
     valueKey: key,
     popperClass: computed(() => {
       const classes = [ns.e("popper")];

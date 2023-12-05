@@ -4,6 +4,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 var vue = require('vue');
 var core = require('@vueuse/core');
+var lodashUnified = require('lodash-unified');
 require('../../../hooks/index.js');
 require('../../../constants/index.js');
 require('../../../utils/index.js');
@@ -17,6 +18,7 @@ var event = require('../../../constants/event.js');
 var index$3 = require('../../../hooks/use-lockscreen/index.js');
 
 const useDialog = (props, targetRef) => {
+  var _a;
   const instance = vue.getCurrentInstance();
   const emit = instance.emit;
   const { nextZIndex } = index.useZIndex();
@@ -26,7 +28,7 @@ const useDialog = (props, targetRef) => {
   const visible = vue.ref(false);
   const closed = vue.ref(false);
   const rendered = vue.ref(false);
-  const zIndex = vue.ref(props.zIndex || nextZIndex());
+  const zIndex = vue.ref((_a = props.zIndex) != null ? _a : nextZIndex());
   let openTimer = void 0;
   let closeTimer = void 0;
   const namespace = useGlobalConfig.useGlobalConfig("namespace", index$2.defaultNamespace);
@@ -115,8 +117,8 @@ const useDialog = (props, targetRef) => {
     emit("closeAutoFocus");
   }
   function onFocusoutPrevented(event) {
-    var _a;
-    if (((_a = event.detail) == null ? void 0 : _a.focusReason) === "pointer") {
+    var _a2;
+    if (((_a2 = event.detail) == null ? void 0 : _a2.focusReason) === "pointer") {
       event.preventDefault();
     }
   }
@@ -133,7 +135,7 @@ const useDialog = (props, targetRef) => {
       closed.value = false;
       open();
       rendered.value = true;
-      zIndex.value = props.zIndex ? zIndex.value++ : nextZIndex();
+      zIndex.value = lodashUnified.isUndefined(props.zIndex) ? nextZIndex() : zIndex.value++;
       vue.nextTick(() => {
         emit("open");
         if (targetRef.value) {

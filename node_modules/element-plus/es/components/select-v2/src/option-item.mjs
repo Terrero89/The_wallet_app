@@ -1,7 +1,9 @@
-import { defineComponent, openBlock, createElementBlock, normalizeStyle, normalizeClass, withModifiers, renderSlot, createElementVNode, toDisplayString } from 'vue';
+import { defineComponent, inject, openBlock, createElementBlock, normalizeStyle, normalizeClass, withModifiers, renderSlot, createElementVNode, toDisplayString } from 'vue';
 import '../../../hooks/index.mjs';
 import { useOption } from './useOption.mjs';
+import { useProps } from './useProps.mjs';
 import { OptionProps } from './defaults.mjs';
+import { selectV2InjectionKey } from './token.mjs';
 import _export_sfc from '../../../_virtual/plugin-vue_export-helper.mjs';
 import { useNamespace } from '../../../hooks/use-namespace/index.mjs';
 
@@ -9,12 +11,15 @@ const _sfc_main = defineComponent({
   props: OptionProps,
   emits: ["select", "hover"],
   setup(props, { emit }) {
+    const select = inject(selectV2InjectionKey);
     const ns = useNamespace("select");
     const { hoverItem, selectOptionClick } = useOption(props, { emit });
+    const { getLabel } = useProps(select.props);
     return {
       ns,
       hoverItem,
-      selectOptionClick
+      selectOptionClick,
+      getLabel
     };
   }
 });
@@ -38,7 +43,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       index: _ctx.index,
       disabled: _ctx.disabled
     }, () => [
-      createElementVNode("span", null, toDisplayString(_ctx.item.label), 1)
+      createElementVNode("span", null, toDisplayString(_ctx.getLabel(_ctx.item)), 1)
     ])
   ], 46, _hoisted_1);
 }

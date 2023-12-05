@@ -1,13 +1,15 @@
 import { ref, computed } from 'vue';
+import { useProps } from './useProps.mjs';
 
 function useAllowCreate(props, states) {
+  const { aliasProps, getLabel, getValue } = useProps(props);
   const createOptionCount = ref(0);
   const cachedSelectedOption = ref(null);
   const enableAllowCreateMode = computed(() => {
     return props.allowCreate && props.filterable;
   });
   function hasExistingOption(query) {
-    const hasValue = (option) => option.value === query;
+    const hasValue = (option) => getValue(option) === query;
     return props.options && props.options.some(hasValue) || states.createdOptions.some(hasValue);
   }
   function selectNewOption(option) {
@@ -24,10 +26,10 @@ function useAllowCreate(props, states) {
     if (enableAllowCreateMode.value) {
       if (query && query.length > 0 && !hasExistingOption(query)) {
         const newOption = {
-          value: query,
-          label: query,
+          [aliasProps.value.value]: query,
+          [aliasProps.value.label]: query,
           created: true,
-          disabled: false
+          [aliasProps.value.disabled]: false
         };
         if (states.createdOptions.length >= createOptionCount.value) {
           states.createdOptions[createOptionCount.value] = newOption;
@@ -48,10 +50,10 @@ function useAllowCreate(props, states) {
     }
   }
   function removeNewOption(option) {
-    if (!enableAllowCreateMode.value || !option || !option.created || option.created && props.reserveKeyword && states.inputValue === option.label) {
+    if (!enableAllowCreateMode.value || !option || !option.created || option.created && props.reserveKeyword && states.inputValue === getLabel(option)) {
       return;
     }
-    const idx = states.createdOptions.findIndex((it) => it.value === option.value);
+    const idx = states.createdOptions.findIndex((it) => getValue(it) === getValue(option));
     if (~idx) {
       states.createdOptions.splice(idx, 1);
       createOptionCount.value--;

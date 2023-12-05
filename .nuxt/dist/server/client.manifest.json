@@ -1,15 +1,18 @@
 {
   "@vite/client": {
+    "prefetch": true,
     "isEntry": true,
     "file": "@vite/client",
     "css": [],
     "module": true,
     "resourceType": "script"
   },
-  "/home/terrero/Documents/2- Web Development/Frontend/Vue-Nuxt/Nuxt3_tracker_app/node_modules/nuxt/dist/app/entry.js": {
+  "/home/terrero/Documents/2- Web Development/Frontend/Vue-Nuxt/wallet_app/node_modules/nuxt/dist/app/entry.js": {
     "resourceType": "script",
     "module": true,
+    "prefetch": true,
+    "preload": true,
     "isEntry": true,
-    "file": "/home/terrero/Documents/2- Web Development/Frontend/Vue-Nuxt/Nuxt3_tracker_app/node_modules/nuxt/dist/app/entry.js"
+    "file": "/home/terrero/Documents/2- Web Development/Frontend/Vue-Nuxt/wallet_app/node_modules/nuxt/dist/app/entry.js"
   }
 }

@@ -102,7 +102,7 @@
   z-index: 1000;
   border-radius: 10px 10px 0 0;
   overflow: hidden;
- background-color: #0bb1fd;
+  background-color: #303031;
   position: fixed;
   bottom: 0;
   width: 100%;

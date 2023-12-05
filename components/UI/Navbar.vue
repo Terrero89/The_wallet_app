@@ -1,43 +1,25 @@
-<script setup lang="ts">
-import {useAuthStore} from "@/stores/auth";
-
-const authStore = useAuthStore();
-const {isAuthenticated} = useAuthStore();
-
-
-//! USER ROUTER, ROUTE TO MAP THE SPECIFIC USER
-let login = computed(() => authStore.isAuthenticated); //reading isAutjhenticated state
-const clickHandler = () => {
-  authStore.isAuthenticated= !authStore.isAuthenticated //changing isAutjhenticated state
-  //----> go to any page we want it to go to.
-}
-
-
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <header>
     <nav class="navbar">
       <div>
-        <li class="nav-logo"><a href="/">TrackerApp</a></li>
+        <li class="nav-logo"><a href="/">Wallet App</a></li>
       </div>
       <div class="links">
         <ul class="nav-links">
-          <li><a href="/user-5/reserve">Reserve</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Contact</a></li>
-        </ul>
+          <li><a href="#">Reserve</a></li>
 
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">About</a></li>
+        </ul>
       </div>
       <NuxtLink to="/login" class="login-btn">
-        <el-button class="login-btn"> {{ !login ? 'Login' : 'Logout' }}</el-button>
+        <el-button class="login-btn"> login</el-button>
       </NuxtLink>
       <NuxtLink to="/signup" class="signup-btn">
-        <el-button type="info" class="signup-btn">{{ !login ? 'Sign up' : 'Logout' }}</el-button>
-      </NuxtLink
-      >
-
-      <button @click="clickHandler">TEST</button>
+        <el-button type="info" class="signup-btn">log out</el-button>
+      </NuxtLink>
     </nav>
   </header>
 </template>
@@ -71,15 +53,11 @@ const clickHandler = () => {
   display: flex;
   margin: 0;
   padding: 0;
-
 }
-
 
 @media screen and (max-width: 678px) {
   .nav-links {
     display: none;
-
-
   }
 }
 
@@ -103,7 +81,6 @@ const clickHandler = () => {
 .buttons {
   margin-left: 10rem;
   display: block;
-
 }
 
 .login-btn {

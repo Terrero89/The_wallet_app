@@ -366,8 +366,8 @@ declare const _default: import("vue").DefineComponent<{
             __epPropKey: true;
         };
     }>>, {}>> & Record<string, any>;
-    DArrowLeft: import("vue").DefineComponent<{}, {}, {}, import("vue").ComputedOptions, import("vue").MethodOptions, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{}>>, {}>;
-    DArrowRight: import("vue").DefineComponent<{}, {}, {}, import("vue").ComputedOptions, import("vue").MethodOptions, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{}>>, {}>;
+    DArrowLeft: any;
+    DArrowRight: any;
     MonthTable: import("vue").DefineComponent<{
         selectionMode: import("../../../../utils").EpPropFinalized<StringConstructor, string, unknown, string, boolean>;
         disabledDate: {

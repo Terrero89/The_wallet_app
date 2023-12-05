@@ -33,7 +33,9 @@ const useDraggable = (targetRef, dragRef, draggable) => {
         offsetX: moveX,
         offsetY: moveY
       };
-      targetRef.value.style.transform = `translate(${style.addUnit(moveX)}, ${style.addUnit(moveY)})`;
+      if (targetRef.value) {
+        targetRef.value.style.transform = `translate(${style.addUnit(moveX)}, ${style.addUnit(moveY)})`;
+      }
     };
     const onMouseup = () => {
       document.removeEventListener("mousemove", onMousemove);

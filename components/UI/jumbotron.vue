@@ -2,7 +2,7 @@ import { Jumbotron } from '../.nuxt/components';
 <template>
   <div class="wrapper">
     <div class="jumbotron">
-      <h1 class="title">TrakerApp</h1>
+      <h1 class="title">The Wallet app</h1>
       <h4 class="subtitle"> <span class="brackets">&#60;   </span>Best way to know what you are doing <span class="brackets">	&#62;</span></h4>
       <p class="para">
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et harum beatae
