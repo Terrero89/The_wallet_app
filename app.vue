@@ -1,22 +1,16 @@
 <template>
-    <NuxtLayout>
-      <NuxtPage :transition="{
-        name: 'bounce',
-        mode: 'out-in'
-      }"/>
+    <NuxtLayout >
+      <NuxtPage />
     </NuxtLayout>
 
 </template>
 
 
-<style >
-.layout-enter-active,
-.layout-leave-active {
-  transition: all 0.4s
+<style scoped >
+
+
+body{
+
 }
-.layout-enter-from,
-.layout-leave-to {
-  opacity: 0;
-  filter: blur(0.5rem);
-}
+
 </style>

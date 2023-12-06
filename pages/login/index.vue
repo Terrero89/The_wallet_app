@@ -1,7 +1,7 @@
 <script setup>
-import { useAuthStore } from "@/stores/auth";
-const authStore = useAuthStore();
-const { isLoggedIn } = useAuthStore();
+// import { useAuthStore } from "@/stores/auth";
+// const authStore = useAuthStore();
+// const { isLoggedIn } = useAuthStore();
 
 definePageMeta({
   // layout: "login",

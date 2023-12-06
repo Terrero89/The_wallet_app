@@ -1,5 +1,5 @@
 import { ComputedRef, MaybeRef } from 'vue'
-export type LayoutKey = "admin" | "default" | "login" | "regular" | "signup"
+export type LayoutKey = "admin" | "default" | "login" | "regular" | "signup" | "user"
 declare module "../../node_modules/nuxt/dist/pages/runtime/composables" {
   interface PageMeta {
     layout?: MaybeRef<LayoutKey | false> | ComputedRef<LayoutKey | false>

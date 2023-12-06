@@ -1,35 +1,37 @@
 <script lang="ts" setup>
-import { useUsersStore } from "@/stores/users";
-import { useAuthStore } from "@/stores/auth";
+// import { useUsersStore } from "@/stores/users";
+// import { useAuthStore } from "@/stores/auth";
 
-const authStore = useAuthStore();
-const { isAuthenticated, login } = useAuthStore();
-const store = useUsersStore();
-const { users } = useUsersStore();
+// const { users } = useUsersStore();
 
 const props = defineProps(["login"]);
 
-const input = ref<string>("");
-const password = ref<string>("");
+const input = ref("");
+const password = ref("");
 
 //validation object
-const validation = reactive({
-  error: false,
-  validated: false,
-});
+// const validation = reactive({
+//   error: false,
+//   validated: false,
+// });
 
 const submitForm = () => {
   if (input.value !== "" && password.value !== "") {
-    validation.validated = true;
+    // validation.validated = true;
     console.log(input.value, password.value);
     console.log("LOGGEd in...");
 
-    login(input.value, password.value); //log in user
+    navigateTo("/user");
   }
   // if (password.value.length < 6) {
   //   console.log("FCKKED")
   // }
 };
+
+definePageMeta({
+  layout: "default",
+//   middleware: 'auth',
+});
 </script>
 
 <template>
@@ -40,11 +42,12 @@ const submitForm = () => {
       </div>
 
       <el-input class="input" v-model="input" placeholder="Email or Username" />
-      <el-input class="input" v-model="password" type="password" placeholder="Password" />
-      <p>{{ validation.error ? "wrong password or username" : "" }}</p>
-
-      <p>{{ authStore.isAuthenticated }}</p>
-
+      <el-input
+        class="input"
+        v-model="password"
+        type="password"
+        placeholder="Password"
+      />
       <button class="submit-btn" type="submit">Login</button>
       <div>
         <span>Not a member?</span>

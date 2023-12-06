@@ -1,0 +1,12 @@
+<script setup>
+
+
+definePageMeta({
+  layout: "user",
+//   middleware: 'auth',
+});
+</script>
+
+<template>
+    <div>USER HOME </div>
+</template>

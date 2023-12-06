@@ -1,25 +1,32 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+
+const admin = ref(false)
+
+</script>
 
 <template>
   <header>
     <nav class="navbar">
       <div>
-        <li class="nav-logo"><a href="/">Wallet App</a></li>
+        <NuxtLink class="nav-logo" to="/"> Wallet app</NuxtLink>
       </div>
       <div class="links">
         <ul class="nav-links">
-          <li><a href="#">Reserve</a></li>
-
-          <li><a href="#">Contact</a></li>
-          <li><a href="#">About</a></li>
+       
+          <NuxtLink class="nav-links" to="/login"> Spending </NuxtLink>
+          <NuxtLink class="nav-links" to="/login"> Balance </NuxtLink>
+          <NuxtLink class="nav-links" to="/user"> Profile </NuxtLink>
+          <NuxtLink v-if="admin" class="nav-links" to="/login"> Admin</NuxtLink>
+          <NuxtLink v-if="admin" class="nav-links" to="/login"> Dashboard </NuxtLink>
         </ul>
       </div>
-      <NuxtLink to="/login" class="login-btn">
-        <el-button class="login-btn"> login</el-button>
-      </NuxtLink>
-      <NuxtLink to="/signup" class="signup-btn">
-        <el-button type="info" class="signup-btn">log out</el-button>
-      </NuxtLink>
+
+      <el-button>
+        <NuxtLink class="login-btn" to="/login">Login</NuxtLink></el-button
+      >
+      <el-button>
+        <NuxtLink class="signup-btn" to="/login">Logout</NuxtLink></el-button
+      >
     </nav>
   </header>
 </template>
@@ -28,9 +35,8 @@
 .nav-logo {
   font-size: 18px;
   padding: 10px 12px;
-
+  color: white;
   list-style: none;
-  color: black;
 }
 
 .nav-logo a {
@@ -39,19 +45,18 @@
 }
 
 .navbar {
-  border-radius: 0 0 10px 10px;
-  background-color: #303031;
+  background-color: #071952;
   padding: 8px 30px;
   display: flex;
   justify-content: center;
   align-items: center;
-  /* border:solid rgb(197, 197, 197) 1px; */
 }
 
 .nav-links {
+  color: white;
   list-style: none;
   display: flex;
-  margin: 0;
+  margin: 0 1rem;
   padding: 0;
 }
 
@@ -67,14 +72,13 @@
 }
 
 .links {
-  margin: 0 4rem;
+  margin-left: auto;
 }
 
-.nav-links li a {
+a {
   text-decoration: none;
   padding: 5px;
   border-radius: 5px;
-  color: white;
   align-items: center;
 }
 
@@ -83,17 +87,11 @@
   display: block;
 }
 
-.login-btn {
+.login-btn,
+.signup-btn {
   text-decoration: none;
   border: none;
   color: black;
-}
-
-.signup-btn {
-  padding: 8px 16px;
-
-  border: none;
-  border-radius: 5px;
   cursor: pointer;
 }
 </style>
