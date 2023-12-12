@@ -1,4 +1,6 @@
 <template>
+  <div class="stats-wrapper">
+    <UICardTitle title="Balance" />
     <el-row>
       <el-col :span="6">
         <el-statistic title="Balance" :value="4000" />
@@ -7,7 +9,7 @@
         <el-statistic :value="4000">
           <template #title>
             <div style="display: inline-flex; align-items: center">
-          Total Debt
+              Total Debt
               <el-icon style="margin-left: 4px" :size="12">
                 <Male />
               </el-icon>
@@ -29,14 +31,18 @@
         </el-statistic>
       </el-col>
     </el-row>
-  </template>
-  
-  <script lang="ts" setup>
-  import { ChatLineRound, Male } from '@element-plus/icons-vue'
-  </script>
-  
-  <style scoped>
-  .el-col {
-    text-align: center;
-  }
-  </style>
+  </div>
+</template>
+
+<script lang="ts" setup>
+import { ChatLineRound, Male } from "@element-plus/icons-vue";
+</script>
+
+<style scoped>
+.el-col {
+  text-align: center;
+}
+.stats-wrapper {
+  padding: 2rem 1rem;
+}
+</style>

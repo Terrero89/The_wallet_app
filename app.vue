@@ -8,7 +8,7 @@
 
 <style >
 body{
-  background-color:rgb(228, 228, 228);
+  background-color:rgb(247, 247, 247);
 }
 
 html{

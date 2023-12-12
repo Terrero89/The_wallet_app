@@ -1,7 +1,5 @@
 <script setup lang="ts">
-
-const admin = ref(false)
-
+const admin = ref(true);
 </script>
 
 <template>
@@ -12,12 +10,19 @@ const admin = ref(false)
       </div>
       <div class="links">
         <ul class="nav-links">
-       
-          <NuxtLink class="nav-links" to="/login"> Spending </NuxtLink>
-          <NuxtLink class="nav-links" to="/login"> Balance </NuxtLink>
-          <NuxtLink class="nav-links" to="/user"> Profile </NuxtLink>
-          <NuxtLink v-if="admin" class="nav-links" to="/login"> Admin</NuxtLink>
-          <NuxtLink v-if="admin" class="nav-links" to="/login"> Dashboard </NuxtLink>
+          <NuxtLink class="nav-links" to="/auth/user/spending">
+            Spending
+          </NuxtLink>
+          <NuxtLink class="nav-links" to="/auth/user/balance">
+            Balance
+          </NuxtLink>
+          <NuxtLink class="nav-links" to="/auth/user/profile">
+            Profile
+          </NuxtLink>
+          <NuxtLink v-if="admin" class="nav-links" to="/auth"> Admin</NuxtLink>
+          <NuxtLink v-if="admin" class="nav-links" to="/auth">
+            Dashboard
+          </NuxtLink>
         </ul>
       </div>
 

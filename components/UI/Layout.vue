@@ -10,7 +10,6 @@
 
 <style scoped>
 .main-container {
-   
   padding: 1rem 1rem;
   margin: 1rem auto 3rem auto;
   border-radius: 5px;
@@ -20,13 +19,8 @@
 }
 
 @media screen and (max-width: 578px) {
-.container{
+  .container {
     background-color: transparent;
+  }
 }
-
- 
-}
-
-
-
 </style>
