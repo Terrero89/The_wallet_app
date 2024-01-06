@@ -1,8 +1,5 @@
 import { ElColorPicker } from '../../.nuxt/components';
-<script setup>
-const avatar = ref("AVATAR");
-const format = (percentage) => (percentage === 100 ? "Full" : `${percentage}%`);
-</script>
+<script setup></script>
 
 <template>
   <div>
@@ -14,18 +11,44 @@ const format = (percentage) => (percentage === 100 ? "Full" : `${percentage}%`);
         <UIGreeting></UIGreeting>
 
         <div class="right col-lg-8 col-md-8">
-          <UICard> <StatsNumbers /></UICard>
-          <UICard><h3>LATEST TRANSACTIONS</h3></UICard>
-          <UICard><h3>ACCOUNTS INFO/ACCOUNTS</h3></UICard>
-          <UICard>MOST FRECUENT PURCHASES</UICard>
-          <UICard> <StatsNumbers /></UICard>
-          <UICard> <StatsNumbers /></UICard>
+          <UICard>
+            <StatsNumbers
+              title="Balance"
+              incomeTitle="Income"
+              incomeValue="1,000"
+              balanceTitle="Overall Debt"
+              balanceDebt="10000"
+              balance="8000"
+              transactionsTitle="Transactions"
+              transactionsValue="35"
+              weeksTitle="Weeks to even"
+              weeksToClose="8"
+          /></UICard>
+
+          <TransactionsLatest />
+          <UICard>
+            <StatsNumbers
+              title="Balance"
+              incomeTitle="Income"
+              incomeValue="1,000"
+              balanceTitle="Overall Debt"
+              balanceDebt="10000"
+              balance="8000"
+              transactionsTitle="Transactions"
+              transactionsValue="35"
+              weeksTitle="Weeks to even"
+              weeksToClose="8"
+          /></UICard>
+          <TransactionsLatest />
+       
+
+    
         </div>
         <div class="left col-lg-4 col-md-4">
           <AvatarProfile />
           <UICard> <h5>BALANCE STANDING 80%</h5></UICard>
           <UICard> <h5>BALANCE STANDING 80%</h5></UICard>
-        
+
           <UICard><h5>WEEKLY STATS</h5></UICard>
         </div>
       </div>

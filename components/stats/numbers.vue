@@ -1,48 +1,77 @@
+<script lang="ts" setup>
+import { ChatLineRound, Male } from "@element-plus/icons-vue";
+
+const props = defineProps([
+  "title",
+  "incomeTitle",
+  "incomeValue",
+  "balanceTitle",
+  "balanceDebt",
+  "balance",
+  "transactionsTitle",
+  "transactionsValue",
+  "weeksTitle",
+  "weeksToClose",
+]);
+</script>
+
 <template>
   <div class="stats-wrapper">
-    <UICardTitle title="Balance" />
-    <el-row>
-      <el-col :span="6">
-        <el-statistic title="Balance" :value="4000" />
-      </el-col>
-      <el-col :span="6">
-        <el-statistic :value="4000">
-          <template #title>
-            <div style="display: inline-flex; align-items: center">
-              Total Debt
-              <el-icon style="margin-left: 4px" :size="12">
-                <Male />
-              </el-icon>
-            </div>
-          </template>
-          <template #suffix>/1,500</template>
-        </el-statistic>
-      </el-col>
-      <el-col :span="6">
-        <el-statistic title="Total Transactions" :value="35" />
-      </el-col>
-      <el-col :span="6">
-        <el-statistic title="Weeks to close" :value="8">
-          <template #suffix>
-            <el-icon style="vertical-align: -0.125em">
-              <ChatLineRound />
-            </el-icon>
-          </template>
-        </el-statistic>
-      </el-col>
-    </el-row>
+    <h6>{{ props.title }}</h6>
+
+    <div class="items">
+      <div class="item">
+        <h6 class="item-title">{{ $props.incomeTitle }}</h6>
+        <p class="item-content">{{ props.incomeValue }}</p>
+      </div>
+
+      <div>
+        <h6 class="item-title">{{ props.balanceTitle }}</h6>
+        <p class="item-content">
+          {{ props.balanceDebt }} / {{ props.balance }}
+        </p>
+      </div>
+
+      <div>
+        <h6 class="item-title">{{ props.transactionsTitle }}</h6>
+        <p class="item-content">{{ props.transactionsValue }}</p>
+      </div>
+      <div>
+        <h6 class="item-title">{{ props.weeksTitle }}</h6>
+        <p class="item-content">{{ props.weeksToClose }}</p>
+      </div>
+    </div>
   </div>
 </template>
 
-<script lang="ts" setup>
-import { ChatLineRound, Male } from "@element-plus/icons-vue";
-</script>
-
 <style scoped>
+.items {
+  display: flex;
+  justify-content: space-evenly;
+  
+}
+
+.item-title {
+  font-weight: bold;
+  color: rgb(150, 150, 150);
+  font-size: 0.9rem;
+  letter-spacing: 0.02rem;
+  margin: 0.2em 10px;
+}
+
+.item-content {
+  letter-spacing: 0.02rem;
+  align-content: center;
+  text-align: center;
+  color: rgb(0, 0, 0);
+  font-weight: 500;
+  font-size: 1.1rem;
+}
 .el-col {
   text-align: center;
 }
 .stats-wrapper {
-  padding: 2rem 1rem;
+  padding:0.5rem 1rem;
 }
 </style>
+11

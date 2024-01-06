@@ -10,19 +10,20 @@ const admin = ref(true);
       </div>
       <div class="links">
         <ul class="nav-links">
-          <NuxtLink class="nav-links" to="/auth/user/spending">
-            Spending
+
+          <NuxtLink class="nav-links" to="/auth/user">
+           Home
           </NuxtLink>
-          <NuxtLink class="nav-links" to="/auth/user/balance">
-            Balance
-          </NuxtLink>
-          <NuxtLink class="nav-links" to="/auth/user/profile">
+     
+          <NuxtLink class="nav-links" to="/auth/user/details">
             Profile
           </NuxtLink>
-          <NuxtLink v-if="admin" class="nav-links" to="/auth"> Admin</NuxtLink>
+           
           <NuxtLink v-if="admin" class="nav-links" to="/auth">
             Dashboard
           </NuxtLink>
+          <!-- <NuxtLink v-if="admin" class="nav-links" to="/auth"> Admin</NuxtLink> -->
+        
         </ul>
       </div>
 
@@ -50,7 +51,7 @@ const admin = ref(true);
 }
 
 .navbar {
-  background-color: #071952;
+  background-color: #057059;
   padding: 8px 30px;
   display: flex;
   justify-content: center;
