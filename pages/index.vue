@@ -1,7 +1,11 @@
-<script setup></script>
+<script setup>
+const t = useText()
+
+</script>
 
 <template>
   <div>
+{{ t }}
     <UIJumbotron>
 
     </UIJumbotron>

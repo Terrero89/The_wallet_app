@@ -307,6 +307,7 @@ declare global {
   const computed: typeof import('../../node_modules/vue')['computed']
   const createError: typeof import('../../node_modules/nuxt/dist/app/composables/error')['createError']
   const customRef: typeof import('../../node_modules/vue')['customRef']
+  const data: typeof import('../../utils/data')['default']
   const defineAppConfig: typeof import('../../node_modules/nuxt/dist/app/nuxt')['defineAppConfig']
   const defineAsyncComponent: typeof import('../../node_modules/vue')['defineAsyncComponent']
   const defineComponent: typeof import('../../node_modules/vue')['defineComponent']
@@ -391,6 +392,7 @@ declare global {
   const useAppConfig: typeof import('../../node_modules/nuxt/dist/app/config')['useAppConfig']
   const useAsyncData: typeof import('../../node_modules/nuxt/dist/app/composables/asyncData')['useAsyncData']
   const useAttrs: typeof import('../../node_modules/vue')['useAttrs']
+  const useBanks: typeof import('../../composables/data')['useBanks']
   const useCookie: typeof import('../../node_modules/nuxt/dist/app/composables/cookie')['useCookie']
   const useCssModule: typeof import('../../node_modules/vue')['useCssModule']
   const useCssVars: typeof import('../../node_modules/vue')['useCssVars']
@@ -419,7 +421,9 @@ declare global {
   const useServerSeoMeta: typeof import('../../node_modules/@unhead/vue')['useServerSeoMeta']
   const useSlots: typeof import('../../node_modules/vue')['useSlots']
   const useState: typeof import('../../node_modules/nuxt/dist/app/composables/state')['useState']
+  const useText: typeof import('../../composables/data')['useText']
   const useTransitionState: typeof import('../../node_modules/vue')['useTransitionState']
+  const useUniqueId: typeof import('../../composables/idGenerator')['useUniqueId']
   const watch: typeof import('../../node_modules/vue')['watch']
   const watchEffect: typeof import('../../node_modules/vue')['watchEffect']
   const watchPostEffect: typeof import('../../node_modules/vue')['watchPostEffect']
@@ -747,6 +751,7 @@ declare module 'vue' {
     readonly computed: UnwrapRef<typeof import('../../node_modules/vue')['computed']>
     readonly createError: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/error')['createError']>
     readonly customRef: UnwrapRef<typeof import('../../node_modules/vue')['customRef']>
+    readonly data: UnwrapRef<typeof import('../../utils/data')['default']>
     readonly defineAppConfig: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/nuxt')['defineAppConfig']>
     readonly defineAsyncComponent: UnwrapRef<typeof import('../../node_modules/vue')['defineAsyncComponent']>
     readonly defineComponent: UnwrapRef<typeof import('../../node_modules/vue')['defineComponent']>
@@ -831,6 +836,7 @@ declare module 'vue' {
     readonly useAppConfig: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/config')['useAppConfig']>
     readonly useAsyncData: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/asyncData')['useAsyncData']>
     readonly useAttrs: UnwrapRef<typeof import('../../node_modules/vue')['useAttrs']>
+    readonly useBanks: UnwrapRef<typeof import('../../composables/data')['useBanks']>
     readonly useCookie: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/cookie')['useCookie']>
     readonly useCssModule: UnwrapRef<typeof import('../../node_modules/vue')['useCssModule']>
     readonly useCssVars: UnwrapRef<typeof import('../../node_modules/vue')['useCssVars']>
@@ -859,7 +865,9 @@ declare module 'vue' {
     readonly useServerSeoMeta: UnwrapRef<typeof import('../../node_modules/@unhead/vue')['useServerSeoMeta']>
     readonly useSlots: UnwrapRef<typeof import('../../node_modules/vue')['useSlots']>
     readonly useState: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/state')['useState']>
+    readonly useText: UnwrapRef<typeof import('../../composables/data')['useText']>
     readonly useTransitionState: UnwrapRef<typeof import('../../node_modules/vue')['useTransitionState']>
+    readonly useUniqueId: UnwrapRef<typeof import('../../composables/idGenerator')['useUniqueId']>
     readonly watch: UnwrapRef<typeof import('../../node_modules/vue')['watch']>
     readonly watchEffect: UnwrapRef<typeof import('../../node_modules/vue')['watchEffect']>
     readonly watchPostEffect: UnwrapRef<typeof import('../../node_modules/vue')['watchPostEffect']>
@@ -1180,6 +1188,7 @@ declare module '@vue/runtime-core' {
     readonly computed: UnwrapRef<typeof import('../../node_modules/vue')['computed']>
     readonly createError: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/error')['createError']>
     readonly customRef: UnwrapRef<typeof import('../../node_modules/vue')['customRef']>
+    readonly data: UnwrapRef<typeof import('../../utils/data')['default']>
     readonly defineAppConfig: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/nuxt')['defineAppConfig']>
     readonly defineAsyncComponent: UnwrapRef<typeof import('../../node_modules/vue')['defineAsyncComponent']>
     readonly defineComponent: UnwrapRef<typeof import('../../node_modules/vue')['defineComponent']>
@@ -1264,6 +1273,7 @@ declare module '@vue/runtime-core' {
     readonly useAppConfig: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/config')['useAppConfig']>
     readonly useAsyncData: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/asyncData')['useAsyncData']>
     readonly useAttrs: UnwrapRef<typeof import('../../node_modules/vue')['useAttrs']>
+    readonly useBanks: UnwrapRef<typeof import('../../composables/data')['useBanks']>
     readonly useCookie: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/cookie')['useCookie']>
     readonly useCssModule: UnwrapRef<typeof import('../../node_modules/vue')['useCssModule']>
     readonly useCssVars: UnwrapRef<typeof import('../../node_modules/vue')['useCssVars']>
@@ -1292,7 +1302,9 @@ declare module '@vue/runtime-core' {
     readonly useServerSeoMeta: UnwrapRef<typeof import('../../node_modules/@unhead/vue')['useServerSeoMeta']>
     readonly useSlots: UnwrapRef<typeof import('../../node_modules/vue')['useSlots']>
     readonly useState: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/state')['useState']>
+    readonly useText: UnwrapRef<typeof import('../../composables/data')['useText']>
     readonly useTransitionState: UnwrapRef<typeof import('../../node_modules/vue')['useTransitionState']>
+    readonly useUniqueId: UnwrapRef<typeof import('../../composables/idGenerator')['useUniqueId']>
     readonly watch: UnwrapRef<typeof import('../../node_modules/vue')['watch']>
     readonly watchEffect: UnwrapRef<typeof import('../../node_modules/vue')['watchEffect']>
     readonly watchPostEffect: UnwrapRef<typeof import('../../node_modules/vue')['watchPostEffect']>

@@ -10,20 +10,14 @@ const admin = ref(true);
       </div>
       <div class="links">
         <ul class="nav-links">
+          <NuxtLink class="nav-links" to="/auth/55505"> Home </NuxtLink>
 
-          <NuxtLink class="nav-links" to="/auth/user">
-           Home
-          </NuxtLink>
-     
-          <NuxtLink class="nav-links" to="/auth/user/details">
-            Profile
-          </NuxtLink>
-           
+          <NuxtLink class="nav-links" to="/auth/55550/info"> Profile </NuxtLink>
+
           <NuxtLink v-if="admin" class="nav-links" to="/auth">
             Dashboard
           </NuxtLink>
           <!-- <NuxtLink v-if="admin" class="nav-links" to="/auth"> Admin</NuxtLink> -->
-        
         </ul>
       </div>
 

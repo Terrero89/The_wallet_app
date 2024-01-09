@@ -7,7 +7,7 @@ const { isAuthenticated } = useAuthStore();
 const store = useUsersStore();
 const { users } = useUsersStore();
 
-const props = defineProps(["login"]);
+const props = defineProps(["login", "formTitle"]);
 
 const first = ref<string>("");
 const last = ref<string>("");
@@ -50,7 +50,7 @@ const submitForm = () => {
   <div class="form">
     <form @submit.prevent="submitForm">
       <div class="header">
-        <h3>PROFILE</h3>
+        <h3>Create Profile</h3>
       </div>
       <div>
         <label class="label" for="">First</label>

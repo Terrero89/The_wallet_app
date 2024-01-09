@@ -1,10 +1,21 @@
 <script lang="ts" setup>
-import { ref } from "vue";
+import { ref,  } from "vue";
 
+import {useUniqueId} from '../../composables/idGenerator'
 import { useAccountsStore } from "@/stores/accounts";
+import { storeToRefs } from "pinia";
 
 const authStore = useAccountsStore();
-const { addAccount, accounts } = useAccountsStore();
+const { createAccount } = useAccountsStore();
+const { wasAccountAdded } = storeToRefs(useAccountsStore()); //reactive property
+
+const props = defineProps(["formTitle"]);
+
+
+//aatomatically generated random ID
+const uniqueId = useUniqueId()
+
+
 const account = ref<string>("");
 const accountType = ref<string>("");
 const balance = ref<number>(0);
@@ -15,6 +26,7 @@ const isAccountActive = ref<boolean>(true);
 
 const submitForm = async () => {
   const accountObj = {
+    id: uniqueId,
     account: account.value,
     accountType: accountType.value,
     balance: balance.value,
@@ -24,17 +36,7 @@ const submitForm = async () => {
     isAccountActive: isAccountActive.value,
   };
 
-  const response = await fetch(
-    "https://wallet-app-d08ee-default-rtdb.firebaseio.com/accounts.json",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        // Add any additional headers if needed
-      },
-      body: JSON.stringify({ ...accountObj, id: "ACC001" }),
-    }
-  );
+  createAccount(uniqueId, accountObj); //sends post request to firebase
 
   //delete form after use
   (account.value = ""), (accountType.value = "");
@@ -44,13 +46,25 @@ const submitForm = async () => {
     (dateMofidied.value = ""),
     (isAccountActive.value = true);
 };
+
+const options = ["Main", "Regular", "Savings", "Cheking", "Other"];
+
+const value = ref("");
 </script>
 
 <template>
   <div class="form">
+  
     <form @submit.prevent="submitForm">
       <div class="header">
-        <h3>Add Account</h3>
+     
+        <h3>{{ props.formTitle }}</h3>
+        <p v-if="wasAccountAdded !== true && wasAccountAdded !== null">
+          Loading...
+        </p>
+        <p v-if="wasAccountAdded !== null && wasAccountAdded !== false">
+          COMPLETED
+        </p>
       </div>
       <div>
         <label class="label" for="account">Account Name:</label>
@@ -58,11 +72,22 @@ const submitForm = async () => {
       </div>
       <div>
         <label class="label" for="type">Account Type:</label>
-        <el-input
-          class="input"
-          v-model="accountType"
-          placeholder="Account Type"
-        />
+        <div>
+          <el-select
+            style="min-width: 98%"
+            v-model="value"
+            class="m-2"
+            placeholder="Select"
+            size="default"
+          >
+            <el-option
+              v-for="item in options"
+              :key="item"
+              :label="item"
+              :value="item"
+            />
+          </el-select>
+        </div>
       </div>
 
       <div>
