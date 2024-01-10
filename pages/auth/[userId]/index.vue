@@ -23,9 +23,11 @@ const routeParam = route.params.userId;
             account="Add Account"
             profile="Profile"
             history="History"
+            balance="Balance"
             route="Account"
             route2="Profile"
             route3="history"
+            route4="balance"
           />
           <UICard>
             <StatsNumbers

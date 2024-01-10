@@ -3,10 +3,9 @@ import { ref } from "vue";
 import type { TabsPaneContext } from "element-plus";
 
 const route = useRoute();
-
 const Id = route.params.userId;
-const activeName = ref("first");
 
+const activeName = ref("first");
 </script>
 
 <template>
@@ -14,7 +13,17 @@ const activeName = ref("first");
     <UILayout>
       {{ Id }}---user param id
       <div class="right col">
-        <AccountsOptions> </AccountsOptions>
+        <AccountsMenu
+          account="Account"
+          profile="Profile"
+          history="History"
+          balance="balance"
+          route="Account"
+          route2="Profile"
+          route3="history"
+          route4="balance"
+        />
+        <AccountsOptions />
       </div>
     </UILayout>
   </div>

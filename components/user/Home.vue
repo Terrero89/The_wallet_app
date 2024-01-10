@@ -13,7 +13,6 @@
           <StatsNumbers />
         </div>
         <div class="bord1">
-       
           <StatsNumbers />
         </div>
         <div class="bord1">

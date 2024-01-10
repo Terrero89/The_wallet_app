@@ -1,14 +1,11 @@
 <template>
   <div>
-<p>    Account item details</p>
+    <p>Account item details</p>
 
-    <UILayout> dfsd
-        
-        <UICard></UICard>
-        <UICard></UICard>
-        <UICard></UICard>
-        
-        
-         </UILayout>
+    <UILayout>
+      <UICard>
+        <AccountsItem />
+      </UICard>
+    </UILayout>
   </div>
 </template>

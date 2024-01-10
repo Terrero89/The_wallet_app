@@ -43,6 +43,8 @@ export const useBanks  = () => {
       ])
 }
 
+
+
 const len = "TEXTTTTH+ING"
 export const useText = ()=>{
   return useState('text', ()=> len)

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import { ref,  } from "vue";
+import { Ref, ref, computed } from "vue";
 
-import {useUniqueId} from '../../composables/idGenerator'
+import { useUniqueId } from "../../composables/idGenerator";
 import { useAccountsStore } from "@/stores/accounts";
 import { storeToRefs } from "pinia";
 
@@ -11,12 +11,24 @@ const { wasAccountAdded } = storeToRefs(useAccountsStore()); //reactive property
 
 const props = defineProps(["formTitle"]);
 
+//interfaces Account
+interface AccountObj {
+  id: unknown;
+  account: string;
+  accountType: string;
+  balance: Number;
+  lastFour: Number;
+  dateCreated: string;
+  dateModified: string;
+  isAccountActive: boolean;
+}
 
 //aatomatically generated random ID
-const uniqueId = useUniqueId()
+const uniqueId = useUniqueId();
 
+//data
 
-const account = ref<string>("");
+const account = ref("");
 const accountType = ref<string>("");
 const balance = ref<number>(0);
 const lastFour = ref<number>(0);
@@ -25,14 +37,14 @@ const dateMofidied = ref<string>(new Date().toLocaleDateString());
 const isAccountActive = ref<boolean>(true);
 
 const submitForm = async () => {
-  const accountObj = {
+  const accountObj: AccountObj = {
     id: uniqueId,
     account: account.value,
     accountType: accountType.value,
     balance: balance.value,
     lastFour: lastFour.value,
     dateCreated: dateCreated.value,
-    dateMofidied: dateMofidied.value,
+    dateModified: dateMofidied.value,
     isAccountActive: isAccountActive.value,
   };
 
@@ -54,10 +66,8 @@ const value = ref("");
 
 <template>
   <div class="form">
-  
     <form @submit.prevent="submitForm">
       <div class="header">
-     
         <h3>{{ props.formTitle }}</h3>
         <p v-if="wasAccountAdded !== true && wasAccountAdded !== null">
           Loading...

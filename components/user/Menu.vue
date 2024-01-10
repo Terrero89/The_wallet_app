@@ -2,12 +2,14 @@
   <div>
     <!-- users Menu -->
     <UIMenu
-      account="Account"
+      account="Accounts"
       profile="Profile"
       history="History"
-      route="Account"
-      route2="Profile"
+      balance="Balance"
+      route="accounts"
+      route2="info"
       route3="history"
+      route4="balance"
     />
   </div>
 </template>
