@@ -3,6 +3,7 @@
     <p>Account item details</p>
 
     <UILayout>
+   
       <UICard>
         <AccountsItem />
       </UICard>

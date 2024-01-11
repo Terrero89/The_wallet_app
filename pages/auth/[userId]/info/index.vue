@@ -1,9 +1,21 @@
 <script lang="ts" setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
+import {useRoute} from 'vue-router'
 import type { TabsPaneContext } from "element-plus";
 
 const route = useRoute();
-const Id = route.params.userId;
+const Id = route.params.userId; //userId params
+
+
+
+
+
+//?routes
+//?COMPUTED PROPERTIES
+const accountLink = computed(()=> `/auth/${Id}/info`)
+const profileLink = computed(()=> `/auth/${Id}/info/profile`)
+const historyLink = computed(()=> `/auth/${Id}/info/history`)
+const balanceLink = computed(()=> `/auth/${Id}/info/balance`)
 
 const activeName = ref("first");
 </script>
@@ -11,19 +23,21 @@ const activeName = ref("first");
 <template>
   <div>
     <UILayout>
+      
       {{ Id }}---user param id
       <div class="right col">
         <AccountsMenu
+          :userId="Id"
           account="Account"
           profile="Profile"
           history="History"
           balance="balance"
-          route="Account"
-          route2="Profile"
-          route3="history"
-          route4="balance"
+          :route="accountLink"
+          :route2="profileLink"
+          :route3="historyLink"
+          :route4="balanceLink"
         />
-        <AccountsOptions />
+        <AccountsOptions :id="Id" />
       </div>
     </UILayout>
   </div>

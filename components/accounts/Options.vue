@@ -60,26 +60,17 @@ const items = [
 
 const activeName = ref("first");
 const detailsLink = computed(() => {
-  return `/auth/5555/52122/details`;
+  return `/auth`;
 });
 </script>
 
 <template>
   <div>
-    <!-- <AccountsMenu
-      account="Account"
-      profile="Profile"
-      history="History"
-      route="Account"
-      route2="Profile"
-      route3="history"
-      route4="balance"
-    /> -->
 
     <UICard>
       <el-tabs v-model="activeName" class="demo-tabs" @tab-click="activeName">
         <el-tab-pane label="Accounts" name="first" class="bor" :stretch="true"
-          >Accounts
+          >Accounts {{ props.routes }}
           <NuxtLink :to="detailsLink" style="text-decoration: none">
             <AccountsDescription
               class="border m-2"

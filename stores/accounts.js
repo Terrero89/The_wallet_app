@@ -6,28 +6,30 @@ export const useAccountsStore = defineStore("accounts", {
     url: "https://wallet-app-d08ee-default-rtdb.firebaseio.com/accounts.json",
     accountsList: [
       {
-        accountId: "15",
+        accountId: "1",
         addedBy: "Jackie",
         name: "Bank of america",
         accountType: "Regular",
         balance: 400.0,
+        limit: 15000,
         lastFour: "4513",
         dateAdded: "10/31/2023",
         status: true,
       },
       {
-        accountId: "11",
+        accountId: "2",
         addedBy: "Sergio",
         name: "Boston Firefighter",
         accountType: "Savings",
         balance: 150.0,
+        limit: 15000,
         lastFour: "2817",
         dateAdded: "10/31/2023",
         status: true,
       },
     
       {
-        accountId: "12",
+        accountId: "3",
         addedBy: "Jackie",
         name: "Chase Bank",
         accountType: "Credit Card",
@@ -38,7 +40,7 @@ export const useAccountsStore = defineStore("accounts", {
         status: true,
       },
       {
-        accountId: "19",
+        accountId: "4",
         addedBy: "Jackie",
         name: "Chase Bank",
         accountType: "Credit Card",

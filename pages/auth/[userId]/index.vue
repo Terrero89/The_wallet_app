@@ -1,8 +1,15 @@
-import { ElColorPicker } from '../../.nuxt/components';
-<script setup>
+<script lang="ts" setup>
+import { ref, computed } from "vue";
+import { useRoute } from "vue-router";
 const route = useRoute();
 
-const routeParam = route.params.userId;
+const userId = route.params.userId;
+
+//?COMPUTED PROPERTIES
+const accountLink = computed(() => `/auth/${userId}/accounts`);
+const infoLink = computed(() => `/auth/${userId}}/info`);
+const historyLink = computed(() => `/auth/${userId}/history`);
+const balanceLink = computed(() => `/auth/${userId}/balance`);
 </script>
 
 <template>
@@ -13,21 +20,22 @@ const routeParam = route.params.userId;
       <div class="external row">
         <!-- GREETING -->
 
-        {{ routeParam }}-route PAram
-
         <UIGreeting></UIGreeting>
 
         <div class="right col-lg-8 col-md-8">
+        
           <!-- users Menu -->
+          <!-- userId below passed to parent components for id -->
           <UserMenu
+            :userId="userId"
             account="Add Account"
             profile="Profile"
             history="History"
             balance="Balance"
-            route="Account"
-            route2="Profile"
-            route3="history"
-            route4="balance"
+            :route="accountLink"
+            :route2="infoLink"
+            :route3="historyLink"
+            :route4="balanceLink"
           />
           <UICard>
             <StatsNumbers

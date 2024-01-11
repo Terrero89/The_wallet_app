@@ -1,7 +1,8 @@
 <script lang="ts" setup>
-import { ref} from "vue";
+import { ref } from "vue";
 
 const props = defineProps([
+  "userId",
   "account",
   "profile",
   "history",
@@ -10,7 +11,6 @@ const props = defineProps([
   "route2",
   "route3",
   "route4",
-
 ]);
 
 const activeIndex = ref("1");
@@ -18,15 +18,24 @@ const activeIndex2 = ref("2");
 const activeIndex3 = ref("3");
 
 const routes = [props.route, props.route2, props.route3, props.route4];
-
+const userParamId = ref(props.userId);
 const handleSelect = (key: string, keyPath: string[]) => {
   console.log(key, keyPath);
 };
 
-const userNum:string = "25ds5a82"; //dummy userId
-
-const routingLink = (key: string) => {
-  return `/auth/${userNum}/${key}`;
+const routingLink = (key: Number) => {
+  if (key === 0) {
+    return `/auth/${userParamId.value}/accounts`;
+  }
+  if (key === 1) {
+    return `/auth/${userParamId.value}/info/profile`;
+  }
+  if (key === 2) {
+    return `/auth/${userParamId.value}/info/history`;
+  }
+  if (key === 3) {
+    return `/auth/${userParamId.value}/info/balance`;
+  }
 };
 </script>
 <template>
@@ -41,7 +50,7 @@ const routingLink = (key: string) => {
       >
         <div v-for="(link, index) in routes" :key="index">
           <el-menu-item index="index" style="text-decoration: none">
-            <NuxtLink :to="routingLink(link)" 
+            <NuxtLink :to="routingLink(index)"
               >{{ link }}-{{ index }}</NuxtLink
             ></el-menu-item
           >
